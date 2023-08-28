@@ -20,10 +20,13 @@ namespace inmobiliariaVGM.Controllers
         // GET: Propietarios/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            RepositorioPropietario rp = new RepositorioPropietario();
+            return View(rp.ObtenerUnPropietario(id));
         }
 
+        
         // GET: Propietarios/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -32,12 +35,13 @@ namespace inmobiliariaVGM.Controllers
         // POST: Propietarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Propietario propietario)
         {
             try
             {
-                // TODO: Add insert logic here
-
+                RepositorioPropietario rp = new RepositorioPropietario();
+                rp.CrearPropietario(propietario);
+                
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -47,19 +51,22 @@ namespace inmobiliariaVGM.Controllers
         }
 
         // GET: Propietarios/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            RepositorioPropietario rp = new RepositorioPropietario();
+            return View(rp.ObtenerUnPropietario(id));
         }
 
         // POST: Propietarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id,Propietario propietario)
         {
             try
             {
-                // TODO: Add update logic here
+                RepositorioPropietario rp = new RepositorioPropietario();
+                rp.EditarPropietario(propietario);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -70,19 +77,22 @@ namespace inmobiliariaVGM.Controllers
         }
 
         // GET: Propietarios/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View();
+            RepositorioPropietario rp = new RepositorioPropietario();
+            return View(rp.ObtenerUnPropietario(id));
         }
 
         // POST: Propietarios/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Propietario propietario)
         {
             try
             {
-                // TODO: Add delete logic here
+                RepositorioPropietario rp = new RepositorioPropietario();
+                rp.EliminarPropietario(id);
 
                 return RedirectToAction(nameof(Index));
             }

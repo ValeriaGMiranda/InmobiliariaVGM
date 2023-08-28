@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using inmobiliariaVGM.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,16 +13,19 @@ namespace inmobiliariaVGM.Controllers
         // GET: Inquilinos
         public ActionResult Index()
         {
-            return View();
+            RepositorioInquilino ri = new RepositorioInquilino();
+            return View(ri.ObtenerInquilinos());
         }
 
         // GET: Inquilinos/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            RepositorioInquilino ri = new RepositorioInquilino();
+            return View(ri.ObtenerUnInquilino(id));
         }
 
         // GET: Inquilinos/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -30,11 +34,12 @@ namespace inmobiliariaVGM.Controllers
         // POST: Inquilinos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Inquilino inquilino)
         {
             try
             {
-                // TODO: Add insert logic here
+                RepositorioInquilino ri = new RepositorioInquilino();
+                ri.CrearInquilino(inquilino);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -47,17 +52,19 @@ namespace inmobiliariaVGM.Controllers
         // GET: Inquilinos/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            RepositorioInquilino ri = new RepositorioInquilino();
+            return View(ri.ObtenerUnInquilino(id));
         }
 
         // POST: Inquilinos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Inquilino inquilino)
         {
             try
             {
-                // TODO: Add update logic here
+                RepositorioInquilino ri = new RepositorioInquilino();
+                ri.EditarInquilino(inquilino);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -70,17 +77,19 @@ namespace inmobiliariaVGM.Controllers
         // GET: Inquilinos/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            RepositorioInquilino ri = new RepositorioInquilino();
+            return View(ri.ObtenerUnInquilino(id));
         }
 
         // POST: Inquilinos/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Inquilino inquilino)
         {
             try
             {
-                // TODO: Add delete logic here
+                RepositorioInquilino ri = new RepositorioInquilino();
+                ri.EliminarInquilino(id);
 
                 return RedirectToAction(nameof(Index));
             }

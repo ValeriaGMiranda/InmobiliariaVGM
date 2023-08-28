@@ -1,31 +1,22 @@
 @model IEnumerable<inmobiliariaVGM.Models.Propietario>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Listado de Propietarios";
 }
 
-<h1>Index</h1>
+<h1>Listado de Propietarios</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear Nuevo Propietario</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id_Propietario)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Apellido)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Dni)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefono)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Mail)
@@ -37,27 +28,18 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id_Propietario)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Apellido)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Dni)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Telefono)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Mail)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Propietario }) |
+                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Propietario }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Propietario })
             </td>
         </tr>
 }
