@@ -1,10 +1,10 @@
 @model inmobiliariaVGM.Models.Propietario
 
 @{
-    ViewData["Title"] = "Detalles";
+    ViewData["Title"] = "Detalles del Propietario";
 }
 
-<h1>Detalles</h1>
+<h1>Detalles del Propietario</h1>
 
 <div>
     <h4>Propietario</h4>
@@ -50,5 +50,5 @@
 </div>
 <div>
     @Html.ActionLink("Editar", "Edit", new { id = Model.Id_Propietario  }) |
-    <a asp-action="Index">Volver al Listado</a>
+    <a asp-action="Index">Volver al listado</a>
 </div>
