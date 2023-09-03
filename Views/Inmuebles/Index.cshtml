@@ -34,10 +34,10 @@
                 @Html.DisplayNameFor(model => model.Activo)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Id_Uso)
+                @Html.DisplayNameFor(model => model.Uso.Nombre)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Id_Tipo)
+                @Html.DisplayNameFor(model => model.Tipo.Nombre)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Id_Propietario)
@@ -67,16 +67,16 @@
                 @Html.DisplayFor(modelItem => item.Precio)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Activo)
+                @(item.Activo==true ? "Si" : "No")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Id_Uso)
+                @Html.DisplayFor(modelItem => item.Uso.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Id_Tipo)
+                @Html.DisplayFor(modelItem => item.Tipo.Nombre)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Id_Propietario)
+                @(item.Titular.Nombre + ' ' +  item.Titular.Apellido)
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id=item.Id_Inmueble }) |

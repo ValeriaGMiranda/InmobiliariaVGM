@@ -2,6 +2,8 @@
 
 @{
     ViewData["Title"] = "Editar Contrato";
+    var listaInmuebles = (List<Inmueble>)ViewBag.listaInmuebles;
+    var listaInquilinos = (List<Inquilino>)ViewBag.listaInquilinos;
 }
 
 <h1>Editar Contrato</h1>
@@ -29,15 +31,25 @@
                 <span asp-validation-for="Monto" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Id_Inmueble" class="control-label"></label>
-                <input asp-for="Id_Inmueble" class="form-control" />
-                <span asp-validation-for="Id_Inmueble" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Id_Inquilino" class="control-label"></label>
-                <input asp-for="Id_Inquilino" class="form-control" />
+                <label class="control-label">Inmueble</label>
+                <select class="form-control" name="Id_Inmueble">
+                    @foreach (var item in listaInmuebles)
+                    {
+                        @:<option @(item.Id_Inmueble==Model.Id_Inmueble ? "selected" : "") value="@item.Id_Inmueble">@(item.Direccion)</option>
+                    }
+                </select>
                 <span asp-validation-for="Id_Inquilino" class="text-danger"></span>
-            </div>
+             </div>
+             <div class="form-group">
+                <label class="control-label">Inquilino</label>
+                <select class="form-control" name="Id_Inquilino">
+                    @foreach (var item in listaInquilinos)
+                    {
+                        @:<option @(item.Id_Inquilino==Model.Id_Inquilino ? "selected" : "") value="@item.Id_Inquilino">@(item.Nombre + " " + item.Apellido)</option>
+                    }
+                </select>
+                <span asp-validation-for="Id_Inquilino" class="text-danger"></span>
+             </div>
             <div class="form-group">
                 <input type="submit" value="Editar" class="btn btn-primary" />
             </div>

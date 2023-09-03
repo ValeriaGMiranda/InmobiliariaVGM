@@ -17,8 +17,12 @@ public class RepositorioContrato
 
         using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
-            var sql = @"SELECT Id_Contrato,Fecha_Inicio,Fecha_Fin,Monto,Id_Inmueble,Id_Inquilino
-            FROM contratos"; 
+            var sql = @"
+            SELECT c.Id_Contrato,c.Fecha_Inicio,c.Fecha_Fin,c.Monto,c.Id_Inmueble,c.Id_Inquilino,
+            i.Direccion,inq.Nombre,inq.Apellido
+            FROM contratos c
+            INNER JOIN inmuebles i ON c.Id_Inmueble = i.Id_Inmueble
+            INNER JOIN inquilinos inq ON c.Id_Inquilino =  inq.Id_Inquilino"; 
 
             using(MySqlCommand cmd = new MySqlCommand(sql, conn))
             {
@@ -27,15 +31,26 @@ public class RepositorioContrato
                 {
                     while(reader.Read())
                     {
-                        res.Add(new Contrato
+                        res.Add(
+                            new Contrato
                         {
                             Id_Contrato = reader.GetInt32("Id_Contrato"),
                             Fecha_Inicio = reader.GetDateTime("Fecha_Inicio"),
                             Fecha_Fin = reader.GetDateTime("Fecha_Fin"),
                             Monto = reader.GetDecimal("Monto"),
                             Id_Inmueble  = reader.GetInt32("Id_Inmueble"),
-                            Id_Inquilino = reader.GetInt32("Id_Inquilino"),                 
-                            
+                            Id_Inquilino = reader.GetInt32("Id_Inquilino"),
+                            Inmueble = new Inmueble
+                                {
+                                   Id_Inmueble  = reader.GetInt32("Id_Inmueble"),
+                                   Direccion = reader.GetString("Direccion"), 
+                                },                
+                            Inquilino = new Inquilino
+                                {
+                                    Id_Inquilino = reader.GetInt32("Id_Inquilino"),
+                                    Nombre = reader.GetString("Nombre"),
+                                    Apellido = reader.GetString("Apellido"),
+                                }
                         });
                     }
                 }
@@ -52,8 +67,11 @@ public class RepositorioContrato
 
           using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
-            var sql = @"SELECT Id_Contrato,Fecha_Inicio,Fecha_Fin,Monto,Id_Inmueble,Id_Inquilino
-            FROM contratos 
+            var sql = @"SELECT c.Id_Contrato,c.Fecha_Inicio,c.Fecha_Fin,c.Monto,c.Id_Inmueble,c.Id_Inquilino,
+            i.Direccion,inq.Nombre,inq.Apellido
+            FROM contratos c
+            INNER JOIN inmuebles i ON c.Id_Inmueble = i.Id_Inmueble
+            INNER JOIN inquilinos inq ON c.Id_Inquilino =  inq.Id_Inquilino
             WHERE Id_Contrato = @id";
 
             using(MySqlCommand cmd = new MySqlCommand(sql, conn))
@@ -72,7 +90,17 @@ public class RepositorioContrato
                             Monto = reader.GetDecimal("Monto"),
                             Id_Inmueble  = reader.GetInt32("Id_Inmueble"),
                             Id_Inquilino = reader.GetInt32("Id_Inquilino"),                     
-                            
+                             Inmueble = new Inmueble
+                                {
+                                   Id_Inmueble  = reader.GetInt32("Id_Inmueble"),
+                                   Direccion = reader.GetString("Direccion"), 
+                                },                
+                            Inquilino = new Inquilino
+                                {
+                                    Id_Inquilino = reader.GetInt32("Id_Inquilino"),
+                                    Nombre = reader.GetString("Nombre"),
+                                    Apellido = reader.GetString("Apellido"),
+                                }
                         });
                     }
                 }

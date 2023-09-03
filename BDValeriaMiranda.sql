@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-09-2023 a las 07:52:59
+-- Tiempo de generación: 04-09-2023 a las 00:08:37
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -41,7 +41,8 @@ CREATE TABLE `contratos` (
 --
 
 INSERT INTO `contratos` (`Id_Contrato`, `Fecha_Inicio`, `Fecha_Fin`, `Monto`, `Id_Inmueble`, `Id_Inquilino`) VALUES
-(1, '2023-06-01', '2024-01-01', 250000, 2, 1);
+(1, '2023-06-01', '2024-01-01', 250000, 2, 1),
+(3, '0001-01-01', '0001-01-01', 200000, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -69,7 +70,8 @@ CREATE TABLE `inmuebles` (
 INSERT INTO `inmuebles` (`Id_Inmueble`, `Direccion`, `Id_Uso`, `Id_Tipo`, `Ambientes`, `Latitud`, `Longitud`, `Precio`, `Activo`, `Id_Propietario`) VALUES
 (1, 'Depto1', 2, 4, 4, 11, 12, 150000, 1, 1),
 (2, 'Casa1', 2, 3, 6, 22, 21, 235000, 1, 2),
-(3, 'Local1', 1, 1, 2, 33, 31, 478000, 1, 1);
+(3, 'Local1', 1, 2, 2, 33, 31, 478000, 1, 2),
+(5, 'Caseros 230', 1, 1, 0, 23, 23, 1500, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -209,13 +211,13 @@ ALTER TABLE `usos`
 -- AUTO_INCREMENT de la tabla `contratos`
 --
 ALTER TABLE `contratos`
-  MODIFY `Id_Contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id_Contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `inmuebles`
 --
 ALTER TABLE `inmuebles`
-  MODIFY `Id_Inmueble` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `Id_Inmueble` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `inquilinos`

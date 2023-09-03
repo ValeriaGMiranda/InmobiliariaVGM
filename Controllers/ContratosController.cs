@@ -27,6 +27,12 @@ namespace inmobiliariaVGM.Controllers
         // GET: Contratos/Create
         public ActionResult Create()
         {
+            RepositorioInmueble ri = new RepositorioInmueble();
+            RepositorioInquilino rinq = new RepositorioInquilino();
+
+            ViewBag.listaInmuebles = ri.ObtenerInmuebles();
+            ViewBag.listaInquilinos = rinq.ObtenerInquilinos();
+            
             return View();
         }
 
@@ -53,6 +59,13 @@ namespace inmobiliariaVGM.Controllers
         public ActionResult Edit(int id)
         {
             RepositorioContrato rc = new RepositorioContrato();
+            RepositorioInmueble ri = new RepositorioInmueble();
+            RepositorioInquilino rinq = new RepositorioInquilino();
+
+            ViewBag.listaInmuebles = ri.ObtenerInmuebles();
+            ViewBag.listaInquilinos = rinq.ObtenerInquilinos();
+        
+
             return View(rc.ObtenerUnContrato(id));
         }
 

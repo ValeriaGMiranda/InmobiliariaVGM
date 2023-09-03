@@ -17,8 +17,13 @@ public class RepositorioInmueble
 
         using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
-            var sql = @"SELECT Id_Inmueble,Direccion,Id_Uso,Id_Tipo,Ambientes,Latitud,Longitud,Precio,Activo,Id_Propietario 
-            FROM inmuebles"; 
+            var sql = @"
+            SELECT i.Id_Inmueble,i.Direccion,i.Id_Uso,i.Id_Tipo,i.Ambientes,i.Latitud,i.Longitud,i.Precio,i.Activo,i.Id_Propietario,
+            p.Nombre, p.Apellido, u.Nombre 'NombreUso', t.Nombre 'NombreTipo'
+            FROM inmuebles i
+            INNER JOIN propietarios p ON i.Id_Propietario = p.Id_Propietario
+            INNER JOIN usos u ON i.Id_Uso = u.Id_Uso
+            INNER JOIN tipos t ON i.Id_Tipo = t.Id_Tipo"; 
 
             using(MySqlCommand cmd = new MySqlCommand(sql, conn))
             {
@@ -27,20 +32,36 @@ public class RepositorioInmueble
                 {
                     while(reader.Read())
                     {
-                        res.Add(new Inmueble
-                        {
-                            Id_Inmueble = reader.GetInt32("Id_Inmueble"),
-                            Direccion = reader.GetString("Direccion"),
-                            Id_Uso = reader.GetInt32("Id_Uso"),
-                            Id_Tipo = reader.GetInt32("Id_Tipo"),
-                            Ambientes  = reader.GetInt32("Ambientes"),
-                            Latitud = reader.GetDecimal("Latitud"),  
-                            Longitud = reader.GetDecimal("Longitud"),
-                            Precio = reader.GetDecimal("Precio"),
-                            Activo = reader.GetBoolean("Activo"),
-                            Id_Propietario = reader.GetInt32("Id_Propietario"),                
-                            
-                        });
+                        res.Add(
+                            new Inmueble
+                                {
+                                    Id_Inmueble = reader.GetInt32("Id_Inmueble"),
+                                    Direccion = reader.GetString("Direccion"),
+                                    Id_Uso = reader.GetInt32("Id_Uso"),
+                                    Id_Tipo = reader.GetInt32("Id_Tipo"),
+                                    Ambientes  = reader.GetInt32("Ambientes"),
+                                    Latitud = reader.GetDecimal("Latitud"),  
+                                    Longitud = reader.GetDecimal("Longitud"),
+                                    Precio = reader.GetDecimal("Precio"),
+                                    Activo = reader.GetBoolean("Activo"),
+                                    Id_Propietario = reader.GetInt32("Id_Propietario"),
+                                    Titular = new Propietario
+                                        {
+                                            Id_Propietario = reader.GetInt32("Id_Propietario"),
+                                            Nombre = reader.GetString("Nombre"),
+                                            Apellido = reader.GetString("Apellido"),
+                                        } ,             
+                                    Uso = new Uso
+                                        {
+                                            Id_Uso = reader.GetInt32("Id_Uso"),
+                                            Nombre = reader.GetString("NombreUso"),
+                                        } ,
+                                    Tipo = new Tipo
+                                        {
+                                            Id_Tipo = reader.GetInt32("Id_Tipo"),
+                                            Nombre = reader.GetString("NombreTipo"),
+                                        }        
+                                });
                     }
                 }
                 conn.Close();
@@ -56,8 +77,12 @@ public class RepositorioInmueble
 
           using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
-            var sql = @"SELECT Id_Inmueble,Direccion,Id_Uso,Id_Tipo,Ambientes,Latitud,Longitud,Precio,Activo,Id_Propietario 
-            FROM inmuebles
+            var sql = @"SELECT i.Id_Inmueble,i.Direccion,i.Id_Uso,i.Id_Tipo,i.Ambientes,i.Latitud,i.Longitud,i.Precio,i.Activo,i.Id_Propietario,
+            p.Nombre, p.Apellido, u.Nombre 'NombreUso', t.Nombre 'NombreTipo'
+            FROM inmuebles i
+            INNER JOIN propietarios p ON i.Id_Propietario = p.Id_Propietario
+            INNER JOIN usos u ON i.Id_Uso = u.Id_Uso
+            INNER JOIN tipos t ON i.Id_Tipo = t.Id_Tipo
             WHERE Id_Inmueble = @id";
 
             using(MySqlCommand cmd = new MySqlCommand(sql, conn))
@@ -80,8 +105,23 @@ public class RepositorioInmueble
                             Precio = reader.GetDecimal("Precio"),
                             Activo = reader.GetBoolean("Activo"),
                             Id_Propietario = reader.GetInt32("Id_Propietario"),                      
-                            
-                        });
+                            Titular = new Propietario
+                                        {
+                                            Id_Propietario = reader.GetInt32("Id_Propietario"),
+                                            Nombre = reader.GetString("Nombre"),
+                                            Apellido = reader.GetString("Apellido"),
+                                        } ,             
+                                    Uso = new Uso
+                                        {
+                                            Id_Uso = reader.GetInt32("Id_Uso"),
+                                            Nombre = reader.GetString("NombreUso"),
+                                        } ,
+                                    Tipo = new Tipo
+                                        {
+                                            Id_Tipo = reader.GetInt32("Id_Tipo"),
+                                            Nombre = reader.GetString("NombreTipo"),
+                                        }        
+                            });
                     }
                 }
                 conn.Close();
@@ -93,7 +133,6 @@ public class RepositorioInmueble
     public int CrearInmueble(Inmueble inmueble)
     { 
         var res = -1;
-
         using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
 

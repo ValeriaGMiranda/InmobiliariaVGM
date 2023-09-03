@@ -50,25 +50,25 @@
             @Html.DisplayNameFor(model => model.Activo)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Activo)
+            @(Model.Activo==true ? "Si" : "No")
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Id_Uso)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id_Uso)
+            @Html.DisplayFor(model => model.Uso.Nombre)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Id_Tipo)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id_Tipo)
+            @Html.DisplayFor(model => model.Tipo.Nombre)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Id_Propietario)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Id_Propietario)
+            @(Model.Titular.Nombre + " " + Model.Titular.Apellido)
         </dd>
     </dl>
 </div>
