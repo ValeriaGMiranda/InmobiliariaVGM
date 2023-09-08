@@ -1,10 +1,10 @@
 @model inmobiliariaVGM.Models.Pago
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Pagos";
 }
 
-<h1>Edit</h1>
+<h1>Editar Pagos</h1>
 
 <h4>Pago</h4>
 <hr />
@@ -12,11 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id_Pago" class="control-label"></label>
-                <input asp-for="Id_Pago" class="form-control" />
-                <span asp-validation-for="Id_Pago" class="text-danger"></span>
-            </div>
+            <input type="hidden" name="Id_Pago" value="@Model.Id_Pago" /> @*sirve de contenedor para el id q paso x parametro a la funcion.*@ 
             <div class="form-group">
                 <label asp-for="Fecha" class="control-label"></label>
                 <input asp-for="Fecha" class="form-control" />
@@ -33,13 +29,13 @@
                 <span asp-validation-for="Id_Contrato" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Editar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Volver al listado</a>
 </div>
 

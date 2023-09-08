@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using inmobiliariaVGM.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,13 +13,15 @@ namespace inmobiliariaVGM.Controllers
         // GET: Usuarios
         public ActionResult Index()
         {
-            return View();
+            RepositorioUsuario ru = new RepositorioUsuario();
+            return View(ru.ObtenerUsuarios());
         }
 
         // GET: Usuarios/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            RepositorioUsuario ru = new RepositorioUsuario();
+            return View(ru.ObtenerUnUsuario(id));
         }
 
         // GET: Usuarios/Create
@@ -30,57 +33,54 @@ namespace inmobiliariaVGM.Controllers
         // POST: Usuarios/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Usuario usuario)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            
+                RepositorioUsuario ru = new RepositorioUsuario();
+                ru.CrearUsuario(usuario);
 
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            
         }
 
         // GET: Usuarios/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            RepositorioUsuario  ru = new RepositorioUsuario();
+            return View(ru.ObtenerUnUsuario(id));
         }
 
         // POST: Usuarios/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Usuario usuario)
         {
-            try
-            {
-                // TODO: Add update logic here
+
+                RepositorioUsuario ru = new RepositorioUsuario();
+                ru.EditarUsuario(usuario);
 
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
         }
 
         // GET: Usuarios/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View();
+            RepositorioUsuario ru = new RepositorioUsuario();
+            return View(ru.ObtenerUnUsuario(id));
         }
 
         // POST: Usuarios/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Usuario usuario)
         {
             try
             {
-                // TODO: Add delete logic here
+                RepositorioUsuario ru = new RepositorioUsuario();
+                ru.EliminarUsuario(id);
 
                 return RedirectToAction(nameof(Index));
             }

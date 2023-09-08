@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 08-09-2023 a las 03:43:50
+-- Tiempo de generación: 08-09-2023 a las 07:21:00
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -139,7 +139,9 @@ INSERT INTO `pagos` (`Id_Pago`, `Fecha`, `Importe`, `Id_Contrato`) VALUES
 (11, '2023-09-10', 65655656, 1),
 (12, '2022-01-05', 100000, 8),
 (13, '2022-02-05', 100000, 8),
-(14, '2022-03-05', 100000, 8);
+(14, '2022-03-05', 100000, 8),
+(15, '2023-09-07', 38000, 6),
+(17, '2023-09-10', 40000, 6);
 
 -- --------------------------------------------------------
 
@@ -219,9 +221,16 @@ CREATE TABLE `usuarios` (
   `Mail` varchar(150) NOT NULL,
   `Password` varchar(150) NOT NULL,
   `Rol` int(11) NOT NULL,
-  `Avatar` varchar(150) NOT NULL,
-  `AvatarFile` varchar(150) NOT NULL
+  `Avatar` varchar(150) DEFAULT NULL,
+  `AvatarFile` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`Id_Usuario`, `Apellido`, `Nombre`, `Mail`, `Password`, `Rol`, `Avatar`, `AvatarFile`) VALUES
+(5, 'Gran', 'Jefecita', 'j@mail.com', '11111111', 1, 'aaaaaaaaaaaaaaaaaaaaaaaaaaa', NULL);
 
 --
 -- Índices para tablas volcadas
@@ -307,7 +316,7 @@ ALTER TABLE `inquilinos`
 -- AUTO_INCREMENT de la tabla `pagos`
 --
 ALTER TABLE `pagos`
-  MODIFY `Id_Pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `Id_Pago` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `propietarios`
@@ -331,7 +340,7 @@ ALTER TABLE `usos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `Id_Usuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Restricciones para tablas volcadas

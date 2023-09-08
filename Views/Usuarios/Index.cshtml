@@ -1,13 +1,13 @@
 @model IEnumerable<inmobiliariaVGM.Models.Usuario>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Lista de Usuarios";
 }
 
-<h1>Index</h1>
+<h1>Lista de Usuarios</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Crear nuevo Usuario</a>
 </p>
 <table class="table">
     <thead>
@@ -61,9 +61,9 @@
                 @Html.DisplayFor(modelItem => item.Avatar)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Usuario}) |
+                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Usuario}) |
+                @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Usuario })
             </td>
         </tr>
 }

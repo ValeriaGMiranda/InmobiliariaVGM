@@ -19,8 +19,8 @@ public class RepositorioPago
         {
             var sql = @"
             SELECT p.Id_Pago,p.Fecha,p.Importe,p.Id_Contrato
-            FROM pagos p
-            INNER JOIN contratos c ON p.Id_Contrato = c.Id_Contrato"; 
+            FROM Pagos p
+            INNER JOIN Contratos c ON p.Id_Contrato = c.Id_Contrato"; 
 
             using(MySqlCommand cmd = new MySqlCommand(sql, conn))
             {
@@ -56,8 +56,8 @@ public class RepositorioPago
         {
             var sql = @"
             SELECT p.Id_Pago,p.Fecha,p.Importe,p.Id_Contrato
-            FROM pagos p
-            INNER JOIN contratos c ON p.Id_Contrato = c.Id_Contrato"; 
+            FROM Pagos p
+            INNER JOIN Contratos c ON p.Id_Contrato = c.Id_Contrato"; 
 
             using(MySqlCommand cmd = new MySqlCommand(sql, conn))
             {
@@ -93,8 +93,8 @@ public class RepositorioPago
         {
             var sql = @"
             SELECT p.Id_Pago,p.Fecha,p.Importe,p.Id_Contrato
-            FROM pagos p
-            INNER JOIN contratos c ON p.Id_Contrato = c.Id_Contrato
+            FROM Pagos p
+            INNER JOIN Contratos c ON p.Id_Contrato = c.Id_Contrato
             WHERE c.Id_Contrato = @id"; 
 
             using(MySqlCommand cmd = new MySqlCommand(sql, conn))
@@ -132,8 +132,8 @@ public class RepositorioPago
           using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
             var sql = @"SELECT p.Id_Pago,p.Fecha,p.Importe,p.Id_Contrato
-            FROM pagos p
-            INNER JOIN contratos c ON p.Id_Contrato = c.Id_Contrato
+            FROM Pagos p
+            INNER JOIN Contratos c ON p.Id_Contrato = c.Id_Contrato
             WHERE Id_Pago = @id";
 
             using(MySqlCommand cmd = new MySqlCommand(sql, conn))
@@ -166,7 +166,7 @@ public class RepositorioPago
         using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
 
-            var sql = @"INSERT INTO pagos(Fecha,Importe,Id_Contrato)
+            var sql = @"INSERT INTO Pagos(Fecha,Importe,Id_Contrato)
             VALUES (@Fecha,@Importe,@Id_Contrato);
             SELECT LAST_INSERT_ID()";
 
@@ -192,7 +192,7 @@ public class RepositorioPago
 
         using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
-            var sql = @"UPDATE pagos
+            var sql = @"UPDATE Pagos
             SET Fecha=@Fecha,Importe=@Importe,Id_Contrato=@Id_Contrato
             WHERE Id_Pago = @id";
 
@@ -201,7 +201,7 @@ public class RepositorioPago
                 cmd.Parameters.AddWithValue("@Fecha", pago.Fecha);
                 cmd.Parameters.AddWithValue("@Importe", pago.Importe);
                 cmd.Parameters.AddWithValue("@Id_Contrato", pago.Id_Contrato);
-                cmd.Parameters.AddWithValue("@Id_Pago", pago.Id_Pago);
+                cmd.Parameters.AddWithValue("@id", pago.Id_Pago);
                 conn.Open();
                 res = cmd.ExecuteNonQuery();
                 conn.Close();

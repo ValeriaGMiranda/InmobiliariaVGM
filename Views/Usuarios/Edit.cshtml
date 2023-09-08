@@ -1,10 +1,10 @@
 @model inmobiliariaVGM.Models.Usuario
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Editar Usuario";
 }
 
-<h1>Edit</h1>
+<h1>Editar Usuario</h1>
 
 <h4>Usuario</h4>
 <hr />
@@ -12,11 +12,7 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Id_Usuario" class="control-label"></label>
-                <input asp-for="Id_Usuario" class="form-control" />
-                <span asp-validation-for="Id_Usuario" class="text-danger"></span>
-            </div>
+             <input type="hidden" name="Id_Usuario" value="@Model.Id_Usuario"/>
             <div class="form-group">
                 <label asp-for="Apellido" class="control-label"></label>
                 <input asp-for="Apellido" class="form-control" />
@@ -48,13 +44,13 @@
                 <span asp-validation-for="Avatar" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Editar" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Volver al listado</a>
 </div>
 

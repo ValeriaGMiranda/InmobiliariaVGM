@@ -13,16 +13,19 @@ namespace inmobiliariaVGM.Controllers
         // GET: Pagos
         public ActionResult Index()
         {
-            return View();
+            RepositorioPago rp = new RepositorioPago();
+            return View(rp.ObtenerPagos());
         }
 
         // GET: Pagos/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            RepositorioPago rp = new RepositorioPago();
+            return View(rp.ObtenerUnPago(id));
         }
 
         // GET: Pagos/Create
+        
         public ActionResult Create()
         {
             return View();
@@ -31,11 +34,12 @@ namespace inmobiliariaVGM.Controllers
         // POST: Pagos/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Pago pago)
         {
             try
             {
-                // TODO: Add insert logic here
+                RepositorioPago rp = new RepositorioPago();
+                rp.CrearPago(pago);
 
                 return RedirectToAction(nameof(Index));
             }
@@ -47,42 +51,42 @@ namespace inmobiliariaVGM.Controllers
 
 
         // GET: Pagos/Edit/5
+        [HttpGet]
         public ActionResult Edit(int id)
         {
-            return View();
+            RepositorioPago rp = new RepositorioPago();
+            return View(rp.ObtenerUnPago(id));
         }
 
         // POST: Pagos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Pago pago)
         {
-            try
-            {
-                // TODO: Add update logic here
 
+                RepositorioPago rp = new RepositorioPago();
+                rp.EditarPago(pago);
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
         }
 
         // GET: Pagos/Delete/5
+        [HttpGet]
         public ActionResult Delete(int id)
         {
-            return View();
+            RepositorioPago rp = new RepositorioPago();
+            return View(rp.ObtenerUnPago(id));
         }
 
         // POST: Pagos/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, Pago pago)
         {
             try
             {
-                // TODO: Add delete logic here
+                RepositorioPago rp = new RepositorioPago();
+                rp.EliminarPago(id);
 
                 return RedirectToAction(nameof(Index));
             }

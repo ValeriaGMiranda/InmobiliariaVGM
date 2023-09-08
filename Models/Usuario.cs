@@ -23,9 +23,9 @@ public class Usuario
     [Required]
     public int Rol { get; set; }
 
-    [Required]
+    
     public string Avatar { get; set; }
 
-    [Required]
+    
     public IFormFile AvatarFile { get; set; }
 }

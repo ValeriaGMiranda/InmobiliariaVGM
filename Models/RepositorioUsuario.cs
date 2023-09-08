@@ -17,7 +17,7 @@ public class RepositorioUsuario
 
         using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
-            var sql = "SELECT Id_Usuario,Apellido,Nombre,Mail,Password,Rol,Avatar,AvatarFile FROM Usuarios"; 
+            var sql = "SELECT Id_Usuario,Apellido,Nombre,Mail,Password,Rol,Avatar FROM Usuarios"; 
 
             using(MySqlCommand cmd = new MySqlCommand(sql, conn))
             {
@@ -35,7 +35,6 @@ public class RepositorioUsuario
                             Password  = reader.GetString("Password"),
                             Rol = reader.GetInt32("Rol"), 
                             Avatar = reader.GetString("Avatar"),                    
-                            
                         });
                     }
                 }
@@ -52,7 +51,8 @@ public class RepositorioUsuario
 
           using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
-            var sql = @"Id_Usuario,Apellido,Nombre,Mail,Password,Rol,Avatar,AvatarFile FROM Usuarios
+            var sql = @" SELECT Id_Usuario,Apellido,Nombre,Mail,Password,Rol,Avatar,AvatarFile 
+            FROM Usuarios
             WHERE Id_Usuario = @id";
 
             using(MySqlCommand cmd = new MySqlCommand(sql, conn))
@@ -101,6 +101,7 @@ public class RepositorioUsuario
                 cmd.Parameters.AddWithValue("@Password", usuario.Password);
                 cmd.Parameters.AddWithValue("@Rol", usuario.Rol);
                 cmd.Parameters.AddWithValue("@Avatar", usuario.Avatar);
+                cmd.Parameters.AddWithValue("@AvatarFile", usuario.AvatarFile);
                 conn.Open();
                 res = Convert.ToInt32(cmd.ExecuteScalar());
                 usuario.Id_Usuario = res;
@@ -118,7 +119,7 @@ public class RepositorioUsuario
         using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
             var sql = @"UPDATE Usuarios
-            SET Apellido=@Apellido,Nombre=@Nombre,Mail=@Mail,Password=@Password,Rol=@Rol,Avatar=@Avatar,AvatarFile=@AvatarFile 
+            SET Apellido=@Apellido,Nombre=@Nombre,Mail=@Mail,Password=@Password,Rol=@Rol,Avatar=@Avatar 
             WHERE Id_Usuario = @id";
 
             using(MySqlCommand cmd = new MySqlCommand(sql,conn))
@@ -129,6 +130,7 @@ public class RepositorioUsuario
                 cmd.Parameters.AddWithValue("@Password", usuario.Password);
                 cmd.Parameters.AddWithValue("@Rol", usuario.Rol);
                 cmd.Parameters.AddWithValue("@Avatar", usuario.Avatar);
+                cmd.Parameters.AddWithValue("@id", usuario.Id_Usuario);
                 conn.Open();
                 res = cmd.ExecuteNonQuery();
                 conn.Close();
