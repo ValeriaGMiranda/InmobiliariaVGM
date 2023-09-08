@@ -110,6 +110,57 @@ public class RepositorioContrato
         return res; 
     }
 
+       public List<Contrato> ObtenerContratosPorInquilino(int id)
+    { 
+        var res = new List<Contrato>();
+
+        using(MySqlConnection conn = new MySqlConnection(connectionString))
+        {
+            var sql = @"
+            SELECT c.Id_Contrato,c.Fecha_Inicio,c.Fecha_Fin,c.Monto,c.Id_Inmueble,c.Id_Inquilino,
+            i.Direccion,inq.Nombre,inq.Apellido
+            FROM contratos c
+            INNER JOIN inmuebles i ON c.Id_Inmueble = i.Id_Inmueble
+            INNER JOIN inquilinos inq ON c.Id_Inquilino =  inq.Id_Inquilino  WHERE c.Id_inquilino = @id"; 
+
+            using(MySqlCommand cmd = new MySqlCommand(sql, conn))
+            {
+                 cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                using(MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        res.Add(
+                            new Contrato
+                        {
+                            Id_Contrato = reader.GetInt32("Id_Contrato"),
+                            Fecha_Inicio = reader.GetDateTime("Fecha_Inicio"),
+                            Fecha_Fin = reader.GetDateTime("Fecha_Fin"),
+                            Monto = reader.GetDecimal("Monto"),
+                            Id_Inmueble  = reader.GetInt32("Id_Inmueble"),
+                            Id_Inquilino = reader.GetInt32("Id_Inquilino"),
+                            Inmueble = new Inmueble
+                                {
+                                   Id_Inmueble  = reader.GetInt32("Id_Inmueble"),
+                                   Direccion = reader.GetString("Direccion"), 
+                                },                
+                            Inquilino = new Inquilino
+                                {
+                                    Id_Inquilino = reader.GetInt32("Id_Inquilino"),
+                                    Nombre = reader.GetString("Nombre"),
+                                    Apellido = reader.GetString("Apellido"),
+                                }
+                        });
+                    }
+                }
+                conn.Close();
+            }
+        }
+
+        return res;
+    }
+
     public int CrearContrato(Contrato contrato)
     { 
         var res = -1;

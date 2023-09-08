@@ -107,5 +107,13 @@ namespace inmobiliariaVGM.Controllers
                 return View();
             }
         }
+
+        
+        public ActionResult ContratosPorInquilino(int id)
+        {
+            RepositorioContrato ri = new RepositorioContrato();
+            return View(ri.ObtenerContratosPorInquilino(id));
+        }
+
     }
 }

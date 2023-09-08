@@ -1,0 +1,75 @@
+@model inmobiliariaVGM.Models.Pago
+
+@{
+    ViewData["Title"] = "Create";
+    var ListaPagos = (List<Pago>)ViewBag.ListaPagos;
+    
+}
+
+<h1>Realizar Pagos</h1>
+
+<h4>EfectuarPago</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="PagoPorContrato">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Fecha" class="control-label"></label>
+                <input asp-for="Fecha" class="form-control" />
+                <span asp-validation-for="Fecha" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Importe" class="control-label"></label>
+                <input asp-for="Importe" class="form-control" />
+                <span asp-validation-for="Importe" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Id_Contrato" type="hidden" value="@(ViewBag.Id_Contrato)" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div class="col-md-8">
+            <table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nro Pago
+            </th>
+            <th>
+                Fecha
+            </th>
+            <th>
+                Importe
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in ListaPagos) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id_Pago)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fecha)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Importe)
+                </td>
+
+            </tr>
+    }
+    </tbody>
+</table>
+
+    </div>
+</div>
+<br>
+<div>
+    <a asp-action="ContratosPorInquilino">Volver</a>
+</div>
+

@@ -98,5 +98,7 @@ namespace inmobiliariaVGM.Controllers
                 return View();
             }
         }
+
+
     }
 }
