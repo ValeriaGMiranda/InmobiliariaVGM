@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using inmobiliariaVGM.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace inmobiliariaVGM.Controllers
 {
+    [Authorize]
     public class InquilinosController : Controller
     {
         // GET: Inquilinos
@@ -75,6 +77,8 @@ namespace inmobiliariaVGM.Controllers
         }
 
         // GET: Inquilinos/Delete/5
+        [Authorize(policy:"Administrador")]
+        [HttpGet]
         public ActionResult Delete(int id)
         {
             RepositorioInquilino ri = new RepositorioInquilino();
@@ -82,6 +86,7 @@ namespace inmobiliariaVGM.Controllers
         }
 
         // POST: Inquilinos/Delete/5
+        [Authorize(policy:"Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, Inquilino inquilino)

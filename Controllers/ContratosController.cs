@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using inmobiliariaVGM.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace inmobiliariaVGM.Controllers
 {
+    [Authorize]
     public class ContratosController : Controller
     {
         // GET: Contratos
@@ -83,6 +85,7 @@ namespace inmobiliariaVGM.Controllers
         }
 
         // GET: Contratos/Delete/5
+        [Authorize(policy:"Administrador")]
         [HttpGet]
         public ActionResult Delete(int id)
         {   
@@ -91,6 +94,7 @@ namespace inmobiliariaVGM.Controllers
         }
 
         // POST: Contratos/Delete/5
+        [Authorize(policy:"Administrador")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, Contrato contrato)

@@ -1,7 +1,26 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+	.AddCookie(options =>//el sitio web valida con cookie
+	{
+		options.LoginPath = "/Usuarios/Login";
+		options.LogoutPath = "/Usuarios/Logout";
+		options.AccessDeniedPath = "/Home/Restringido";
+		//options.ExpireTimeSpan = TimeSpan.FromMinutes(5);//Tiempo de expiración
+	});
+
+builder.Services.AddAuthorization(options=>
+{
+    options.AddPolicy("Administrador", policy =>
+        policy.RequireRole("Administrador")
+    );
+});
 
 var app = builder.Build();
 
@@ -18,6 +37,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

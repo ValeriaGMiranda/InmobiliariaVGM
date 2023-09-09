@@ -81,7 +81,10 @@
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id=item.Id_Inmueble }) |
                 @Html.ActionLink("Detalles", "Details", new { id=item.Id_Inmueble }) |
-                @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Inmueble })|
+                @if(User.IsInRole("Administrador")){
+                     @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Inmueble }) 
+                }
+               
             </td>
         </tr>
 }

@@ -1,3 +1,4 @@
+using System.Drawing;
 using MySql.Data.MySqlClient;
 
 namespace inmobiliariaVGM.Models;
@@ -157,6 +158,43 @@ public class RepositorioUsuario
             }
         }
         return res;
+    }
+
+    public Usuario ObtenerPorEmail(string mail)
+    {
+        var res = new Usuario();
+
+          using(MySqlConnection conn = new MySqlConnection(connectionString))
+        {
+            var sql = @" SELECT Id_Usuario,Apellido,Nombre,Mail,Password,Rol,Avatar,AvatarFile 
+            FROM Usuarios
+            WHERE Mail = @mail";
+
+            using(MySqlCommand cmd = new MySqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@mail", mail);
+                conn.Open();
+                using(MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        res = (new Usuario
+                        {
+                            Id_Usuario = reader.GetInt32("Id_Usuario"),
+                            Apellido = reader.GetString("Apellido"),
+                            Nombre = reader.GetString("Nombre"),
+                            Mail = reader.GetString("Mail"),
+                            Password  = reader.GetString("Password"),
+                            Rol = reader.GetInt32("Rol"), 
+                            Avatar = reader.GetString("Avatar"),                     
+                            
+                        });
+                    }
+                }
+                conn.Close();
+            }
+        }
+        return res; 
     }
 }
 

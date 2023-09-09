@@ -2,6 +2,11 @@ using System.ComponentModel.DataAnnotations;
 
 namespace inmobiliariaVGM.Models;
 
+public enum enRoles
+{
+    Administrador = 1,
+
+}
 public class Usuario
 {
     [Key]
@@ -22,10 +27,10 @@ public class Usuario
 
     [Required]
     public int Rol { get; set; }
-
     
     public string Avatar { get; set; }
-
     
     public IFormFile AvatarFile { get; set; }
+
+    public string RolNombre => Rol > 0 ? ((enRoles)Rol).ToString() : "";
 }
