@@ -42,11 +42,3 @@ public class Inmueble
    [ForeignKey(nameof(Id_Propietario))]
     public Propietario? Titular { get; set; }
 }
-
-//dotnet-aspnet-codegenerator controller -name "UsuariosController" -outDir "Controllers" -namespace "inmobiliariaVGM.Controllers" -f -actions
-
-//dotnet-aspnet-codegenerator view Index List -outDir "Views/Usuarios" -udl --model inmobiliariaVGM.Models.Usuario -f
-//dotnet-aspnet-codegenerator view Create Create -outDir "Views/Usuarios" -udl --model inmobiliariaVGM.Models.Usuario -f
-//dotnet-aspnet-codegenerator view Edit Edit -outDir "Views/Usuarios" -udl --model inmobiliariaVGM.Models.Usuario -f
-//dotnet-aspnet-codegenerator view Details Details -outDir "Views/Usuarios" -udl --model inmobiliariaVGM.Models.Usuario -f
-//dotnet-aspnet-codegenerator view Delete Delete -outDir "Views/Usuarios" -udl --model inmobiliariaVGM.Models.Usuario -f

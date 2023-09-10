@@ -1,0 +1,60 @@
+@model IEnumerable<inmobiliariaVGM.Models.Contrato>
+
+@{
+    ViewData["Title"] = "Reporte de Contratos Vigentes";
+}
+
+<h1>Reporte de Contratos</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id_Contrato)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fecha_Inicio)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Fecha_Fin)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Monto)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id_Inmueble)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Id_Inquilino)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id_Contrato)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha_Inicio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fecha_Fin)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Monto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Inmueble.Direccion)
+                    </td>
+                    <td>
+                        @(item.Inquilino.Nombre + ' ' +  item.Inquilino.Apellido)
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+</div>

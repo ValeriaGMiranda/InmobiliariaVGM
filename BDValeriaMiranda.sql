@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-09-2023 a las 05:37:29
+-- Tiempo de generación: 10-09-2023 a las 08:49:34
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -42,13 +42,15 @@ CREATE TABLE `contratos` (
 
 INSERT INTO `contratos` (`Id_Contrato`, `Fecha_Inicio`, `Fecha_Fin`, `Monto`, `Id_Inmueble`, `Id_Inquilino`) VALUES
 (1, '2023-06-01', '2024-01-01', 250000, 2, 1),
-(3, '0001-01-01', '0001-01-01', 200000, 1, 2),
+(3, '2010-01-01', '2010-01-26', 200000, 1, 2),
 (4, '2022-10-14', '2023-10-14', 210000, 2, 5),
 (5, '2023-02-14', '2023-12-25', 225000, 5, 6),
 (6, '2023-05-25', '2023-12-31', 178999, 8, 7),
 (8, '2021-01-01', '2021-12-31', 100000, 7, 4),
 (9, '2022-01-01', '2022-12-31', 150000, 7, 4),
-(10, '2023-01-01', '2023-12-31', 200000, 7, 4);
+(10, '2023-01-01', '2023-12-31', 200000, 7, 4),
+(11, '2023-09-01', '2023-09-10', 0, 7, 1),
+(18, '2023-09-15', '2023-09-23', 150000, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -75,7 +77,7 @@ CREATE TABLE `inmuebles` (
 
 INSERT INTO `inmuebles` (`Id_Inmueble`, `Direccion`, `Id_Uso`, `Id_Tipo`, `Ambientes`, `Latitud`, `Longitud`, `Precio`, `Activo`, `Id_Propietario`) VALUES
 (1, 'Caseros 123', 2, 4, 4, 11, 12, 150000, 1, 1),
-(2, 'Av Centenario 555', 2, 3, 6, 22, 21, 235000, 1, 2),
+(2, 'Av Centenario 555', 2, 3, 6, 22, 21, 235000, 0, 2),
 (3, 'Chacabuco 456', 1, 2, 2, 33, 31, 478000, 1, 2),
 (5, 'Caseros 230', 1, 1, 0, 23, 23, 1500, 1, 1),
 (6, 'Ayacucho', 2, 4, 2, 156, 321, 175000, 1, 5),
@@ -299,7 +301,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `contratos`
 --
 ALTER TABLE `contratos`
-  MODIFY `Id_Contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `Id_Contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `inmuebles`

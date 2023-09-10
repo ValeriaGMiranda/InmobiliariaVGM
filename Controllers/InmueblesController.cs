@@ -114,5 +114,73 @@ namespace inmobiliariaVGM.Controllers
                 return View();
             }
         }
+
+        [HttpGet]
+        public ActionResult BuscarInmuebles()
+        {
+            RepositorioUso ru = new RepositorioUso();
+            RepositorioTipo rt = new RepositorioTipo();
+
+            ViewBag.listaUsos = ru.ObtenerUsos();
+            ViewBag.listaTipos = rt.ObtenerTipos();
+            
+            RepositorioInmueble ri = new RepositorioInmueble();
+            return View(ri.ObtenerInmuebles());
+        }
+
+        [HttpPost]
+        public ActionResult BuscarInmuebles(InmuebleBusqueda ib)
+        {
+            RepositorioUso ru = new RepositorioUso();
+            RepositorioTipo rt = new RepositorioTipo();
+
+            ViewBag.listaUsos = ru.ObtenerUsos();
+            ViewBag.listaTipos = rt.ObtenerTipos();
+
+
+
+            RepositorioInmueble ri = new RepositorioInmueble();
+            return View(ri.BuscarInmuebles(ib));
+        }
+
+
+        [HttpGet]
+        public ActionResult InmueblesEstados()
+        {
+            RepositorioPropietario rp = new RepositorioPropietario();
+
+            ViewBag.listaPropietarios = rp.ObtenerPropietarios();
+
+            RepositorioInmueble ri = new RepositorioInmueble();
+            return View(ri.ObtenerInmuebles());
+        }
+
+        [HttpPost]
+        public ActionResult InmueblesEstados(InmuebleBusqueda ib)
+        {
+            RepositorioPropietario rp = new RepositorioPropietario();
+
+            ViewBag.listaPropietarios = rp.ObtenerPropietarios();
+
+
+            RepositorioInmueble ri = new RepositorioInmueble();
+            return View(ri.BuscarInmueblesEstado(ib));
+        }
+
+         [HttpGet]
+        public ActionResult InmueblesContratos()
+        {
+            RepositorioInmueble ri = new RepositorioInmueble();
+            return View(ri.ObtenerInmuebles());
+        }
+
+        [HttpPost]
+        public ActionResult InmueblesContratos(InmuebleBusqueda ib)
+        {
+            RepositorioInmueble ri = new RepositorioInmueble();
+            return View(ri.BuscarInmuebles(ib));
+        }
+
+
     }
 }

@@ -27,14 +27,15 @@ namespace inmobiliariaVGM.Controllers
         }
 
         // GET: Contratos/Create
-        public ActionResult Create()
+        [HttpGet]
+        public ActionResult Create() 
         {
             RepositorioInmueble ri = new RepositorioInmueble();
             RepositorioInquilino rinq = new RepositorioInquilino();
 
             ViewBag.listaInmuebles = ri.ObtenerInmuebles();
             ViewBag.listaInquilinos = rinq.ObtenerInquilinos();
-            
+
             return View();
         }
 
@@ -112,11 +113,40 @@ namespace inmobiliariaVGM.Controllers
             }
         }
 
-        
+        [HttpGet]
         public ActionResult ContratosPorInquilino(int id)
         {
             RepositorioContrato ri = new RepositorioContrato();
             return View(ri.ObtenerContratosPorInquilino(id));
+        }
+
+
+        [HttpGet]
+        public ActionResult ContratosVigentes()
+        {
+            
+            RepositorioContrato rc = new RepositorioContrato();
+            return View(rc.ObtenerContratosVigentes());
+        }
+
+        [HttpGet]
+        public ActionResult ContratosInmuebles()
+        {
+            RepositorioInmueble ri = new RepositorioInmueble();
+            ViewBag.listaInmuebles = ri.ObtenerInmuebles();
+
+            RepositorioContrato rc = new RepositorioContrato();
+            return View(rc.ObtenerContratos());
+        }
+
+        [HttpPost]
+        public ActionResult ContratosInmuebles(ContratoBusqueda cb) 
+        {
+            RepositorioInmueble ri = new RepositorioInmueble();
+            ViewBag.listaInmuebles = ri.ObtenerInmuebles();
+
+            RepositorioContrato rc = new RepositorioContrato();
+            return View(rc.ObtenerContratosPorInmueble(cb));
         }
 
     }

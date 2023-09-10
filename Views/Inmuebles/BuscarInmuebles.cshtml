@@ -1,0 +1,138 @@
+@model IEnumerable<inmobiliariaVGM.Models.Inmueble>
+
+@{
+    ViewData["Title"] = "Listado de Inmuebles";
+    var listaUsos = (List<Uso>)ViewBag.listaUsos;
+    var listaTipos = (List<Tipo>)ViewBag.listaTipos;   
+}
+
+<h1>Listado de Inmuebles</h1>
+
+    <form asp-action="BuscarInmuebles">
+
+        <div class="row mt-5 mb-5">
+                <div class="col-md-1">
+                    <label class="control-label">Ambientes</label>
+                    <input type="number" name="Ambientes" class="form-control" />
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label">Precio</label>
+                    <input type="number" name="Precio" class="form-control" />
+                </div>
+                 <div class="col-md-2">
+                    <label class="control-label">Uso</label>
+                     <select class="form-control" name="Id_Uso">
+                        <option value="" selected>Todos</option>
+                        @foreach (var item in listaUsos)
+                        {
+                            @:<option value="@item.Id_Uso">@(item.Nombre)</option>
+                        }
+                    </select>
+                </div>
+                 <div class="col-md-2">
+                    <label class="control-label">Tipo</label>
+                    <select class="form-control" name="Id_Tipo">
+                        <option value="" selected>Todos</option>
+                        @foreach (var item in listaTipos)
+                        {
+                            @:<option value="@item.Id_Tipo">@(item.Nombre)</option>
+                        }
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <label class="control-label">Fecha Desde</label>
+                    <input type="date" name="Fecha_Inicio" required class="form-control" />
+                </div>
+                 <div class="col-md-2">
+                    <label class="control-label">Fecha Hasta</label>
+                    <input type="date" name="Fecha_Fin" required class="form-control" />
+                </div>
+                 <div class="col-md-1 mt-4">
+                    <input type="submit" value="Crear" class="btn btn-primary" />
+                </div>
+        </div>
+ </form>
+<div class="row">
+    <div class="col-md-12">
+
+        <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Inmueble)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ambientes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Latitud)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Longitud)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Activo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Uso.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Id_Propietario)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id_Inmueble)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ambientes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitud)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @(item.Activo==true ? "Si" : "No")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Uso.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo.Nombre)
+            </td>
+            <td>
+                @(item.Titular.Nombre + ' ' +  item.Titular.Apellido)
+            </td>
+            <td>
+                @Html.ActionLink("Crear Contrato", "Create","Contratos", new { id_Inmueble=item.Id_Inmueble }) |          
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+
+
+    </div>
+</div>
