@@ -332,12 +332,14 @@ public class RepositorioInmueble
         using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
             var sql = @"
-            SELECT i.Id_Inmueble,i.Direccion,i.Id_Uso,i.Id_Tipo,i.Ambientes,i.Latitud,i.Longitud,i.Precio,i.Activo,i.Id_Propietario, p.Nombre, p.Apellido, u.Nombre 'NombreUso', t.Nombre 'NombreTipo' 
+            SELECT * 
             FROM inmuebles i
-            INNER JOIN propietarios p ON i.Id_Propietario = p.Id_Propietario 
-            INNER JOIN usos u ON i.Id_Uso = u.Id_Uso 
-            INNER JOIN tipos t ON i.Id_Tipo = t.Id_Tipo 
-            WHERE 1 = 1 "; 
+            LEFT JOIN contratos c ON c.Id_Inmueble = i.Id_Inmueble
+            WHERE Activo = 1
+            AND (
+                (c.Fecha_Inicio > @fecha_fin OR c.Fecha_Fin < @fecha_inicio)
+                OR c.Id_Contrato IS NULL
+            )"; 
 
             if (ib.Activo.HasValue)
             {
@@ -405,5 +407,53 @@ public class RepositorioInmueble
 
         return res;
     } 
+
+  public Boolean VerificarDisponibilidad(int id,DateTime fecha_inicio,DateTime fecha_fin)
+    {
+        var res = 0;
+
+          using(MySqlConnection conn = new MySqlConnection(connectionString))
+        {
+            var sql = @"SELECT count(1) cantidad
+            FROM inmuebles i
+            LEFT JOIN contratos c ON c.Id_Inmueble = i.Id_Inmueble
+            WHERE Activo = 1
+            AND (
+                (c.Fecha_Inicio <= @fecha_fin AND c.Fecha_Fin >= @fecha_inicio)
+                OR c.Id_Contrato IS NULL
+            )
+            AND i.id_inmueble = @id";
+
+            using(MySqlCommand cmd = new MySqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@fecha_inicio", fecha_inicio);
+                cmd.Parameters.AddWithValue("@fecha_fin", fecha_fin);
+                cmd.Parameters.AddWithValue("@id", id);
+
+                conn.Open();
+                using(MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        res =   reader.GetInt32("cantidad");
+                    }
+                }
+                conn.Close();
+            }
+        }
+
+        //Contador devuelve 0 si está disponible para Alquilar
+        //Contador devuelve 1 o mas si NO está disponible para Alquilar
+
+        return res == 0; 
+        //Funcion Devuelve True si está Disponible
+
+    }
+
+
+
+
+
+
 }
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-09-2023 a las 08:49:34
+-- Tiempo de generación: 11-09-2023 a las 08:47:00
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -41,7 +41,7 @@ CREATE TABLE `contratos` (
 --
 
 INSERT INTO `contratos` (`Id_Contrato`, `Fecha_Inicio`, `Fecha_Fin`, `Monto`, `Id_Inmueble`, `Id_Inquilino`) VALUES
-(1, '2023-06-01', '2024-01-01', 250000, 2, 1),
+(1, '2023-06-01', '2023-09-11', 250000, 2, 1),
 (3, '2010-01-01', '2010-01-26', 200000, 1, 2),
 (4, '2022-10-14', '2023-10-14', 210000, 2, 5),
 (5, '2023-02-14', '2023-12-25', 225000, 5, 6),
@@ -50,7 +50,9 @@ INSERT INTO `contratos` (`Id_Contrato`, `Fecha_Inicio`, `Fecha_Fin`, `Monto`, `I
 (9, '2022-01-01', '2022-12-31', 150000, 7, 4),
 (10, '2023-01-01', '2023-12-31', 200000, 7, 4),
 (11, '2023-09-01', '2023-09-10', 0, 7, 1),
-(18, '2023-09-15', '2023-09-23', 150000, 1, 1);
+(18, '2023-09-15', '2023-09-23', 150000, 1, 1),
+(32, '2023-09-03', '2023-09-07', 12, 1, 1),
+(35, '2023-09-01', '2023-09-02', 123, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -301,7 +303,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `contratos`
 --
 ALTER TABLE `contratos`
-  MODIFY `Id_Contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `Id_Contrato` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT de la tabla `inmuebles`

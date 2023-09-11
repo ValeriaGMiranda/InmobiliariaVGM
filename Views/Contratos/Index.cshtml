@@ -61,6 +61,15 @@
                 {
                     @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Contrato })
                 }
+                 @Html.ActionLink("Pagar Contrato", "PagoPorContrato", "Pagos", new { id=item.Id_Contrato }) |
+
+                @if(DateTime.Now >= item.Fecha_Inicio && DateTime.Now <= item.Fecha_Fin){
+                   @Html.ActionLink("Finalizar Contrato", "FinalizarContrato", "Contratos", new { id=item.Id_Contrato })  
+                } 
+
+                @if(DateTime.Now < item.Fecha_Inicio || DateTime.Now > item.Fecha_Fin){
+                   @Html.ActionLink("Renovar Contrato", "RenovarContrato", "Contratos", new { id_inquilino=item.Id_Inquilino,id_inmueble = item.Id_Inmueble }) 
+                }
             </td>
         </tr>
 }

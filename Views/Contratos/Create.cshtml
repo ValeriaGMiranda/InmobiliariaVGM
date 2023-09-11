@@ -4,11 +4,13 @@
     ViewData["Title"] = "Crear Contrato";
     var listaInmuebles = (List<Inmueble>)ViewBag.listaInmuebles;
     var listaInquilinos = (List<Inquilino>)ViewBag.listaInquilinos;
+    var id_inmueble = (int)(ViewBag.id_inmueble != null? ViewBag.id_inmueble : 0 );
+    var id_inquilino = (int)(ViewBag.id_inquilino != null? ViewBag.id_inquilino : 0 );
 }
 
 <h1>Crear Contrato</h1>
 
-<h4>Contrato</h4>
+<h4>Contrato </h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -34,7 +36,7 @@
                 <select class="form-control" name="Id_Inmueble">
                     @foreach (var item in listaInmuebles)
                     {
-                        @:<option  value="@item.Id_Inmueble">@(item.Direccion)</option>
+                        @:<option @(id_inmueble == item.Id_Inmueble? "Selected":"" )  value="@item.Id_Inmueble">@(item.Direccion)</option>
                     }
                 </select>
                 <span asp-validation-for="Id_Inquilino" class="text-danger"></span>
@@ -44,7 +46,7 @@
                 <select class="form-control" name="Id_Inquilino">
                     @foreach (var item in listaInquilinos)
                     {
-                        @:<option value="@item.Id_Inquilino">@(item.Nombre + " " + item.Apellido)</option>
+                        @:<option @(id_inquilino == item.Id_Inquilino? "Selected":"" )  value="@item.Id_Inquilino">@(item.Nombre + " " + item.Apellido)</option>
                     }
                 </select>
                 <span asp-validation-for="Id_Inquilino" class="text-danger"></span>
@@ -57,6 +59,11 @@
 </div>
 
 <div>
-    <a asp-action="Index">Volver al listado</a>
+ @if(id_inmueble > 0){
+    <a asp-action="BuscarInmuebles" asp-controller="Inmuebles">Volver al listado</a>
+ }
+ else{
+     <a asp-action="Index">Volver al listado</a>
+ }
 </div>
 

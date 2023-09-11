@@ -58,7 +58,11 @@
                 @Html.ActionLink("Editar", "Edit", new { id=item.Id_Contrato}) |
                 @Html.ActionLink("Detalles", "Details", new { id=item.Id_Contrato }) |
                 @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Contrato }) |
-                @Html.ActionLink("Pagar Contrato", "PagoPorContrato", "Pagos", new { id=item.Id_Contrato })
+                @Html.ActionLink("Pagar Contrato", "PagoPorContrato", "Pagos", new { id=item.Id_Contrato }) |
+                @if(DateTime.Now >= item.Fecha_Inicio && DateTime.Now <= item.Fecha_Fin){
+                   @Html.ActionLink("Finalizar Contrato", "FinalizarContrato", "Contratos", new { id=item.Id_Contrato })     
+                }
+                
             </td>
         </tr>
 }

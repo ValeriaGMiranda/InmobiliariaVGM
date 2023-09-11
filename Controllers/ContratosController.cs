@@ -30,6 +30,7 @@ namespace inmobiliariaVGM.Controllers
         [HttpGet]
         public ActionResult Create() 
         {
+            
             RepositorioInmueble ri = new RepositorioInmueble();
             RepositorioInquilino rinq = new RepositorioInquilino();
 
@@ -44,17 +45,24 @@ namespace inmobiliariaVGM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Contrato contrato)
         {
-            try
-            {
-                RepositorioContrato rc = new RepositorioContrato();
-                rc.CrearContrato(contrato);
+            RepositorioInmueble ri = new RepositorioInmueble();
+            RepositorioInquilino rinq = new RepositorioInquilino();
 
+
+            ViewBag.listaInmuebles = ri.ObtenerInmuebles();
+            ViewBag.listaInquilinos = rinq.ObtenerInquilinos();
+
+            RepositorioContrato rc = new RepositorioContrato();
+
+            if(ri.VerificarDisponibilidad(contrato.Id_Inmueble,contrato.Fecha_Inicio,contrato.Fecha_Fin)){
+                rc.CrearContrato(contrato);
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
+            else{
+                Console.WriteLine("No se pudo crear el contrato.");
                 return View();
             }
+
         }
 
         // GET: Contratos/Edit/5
@@ -66,8 +74,7 @@ namespace inmobiliariaVGM.Controllers
             RepositorioInquilino rinq = new RepositorioInquilino();
 
             ViewBag.listaInmuebles = ri.ObtenerInmuebles();
-            ViewBag.listaInquilinos = rinq.ObtenerInquilinos();
-        
+            ViewBag.listaInquilinos = rinq.ObtenerInquilinos();        
 
             return View(rc.ObtenerUnContrato(id));
         }
@@ -77,11 +84,17 @@ namespace inmobiliariaVGM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, Contrato contrato)
         {
-
+                RepositorioInmueble ri = new RepositorioInmueble();                     
                 RepositorioContrato rc = new RepositorioContrato();
-                rc.EditarContrato(contrato);
 
+           if(ri.VerificarDisponibilidad(contrato.Id_Inmueble,contrato.Fecha_Inicio,contrato.Fecha_Fin)){
+                rc.EditarContrato(contrato);
                 return RedirectToAction(nameof(Index));
+            }
+            else{
+                Console.WriteLine("No se pudo crear el contrato.");
+                return View();
+            }
        
         }
 
@@ -148,6 +161,57 @@ namespace inmobiliariaVGM.Controllers
             RepositorioContrato rc = new RepositorioContrato();
             return View(rc.ObtenerContratosPorInmueble(cb));
         }
+
+        
+        [HttpGet]
+        public ActionResult CreateContrato(int id_inmueble = 0) 
+        {
+            ViewBag.id_inmueble = id_inmueble;
+            RepositorioInmueble ri = new RepositorioInmueble();
+            RepositorioInquilino rinq = new RepositorioInquilino();
+
+            ViewBag.listaInmuebles = ri.ObtenerInmuebles();
+            ViewBag.listaInquilinos = rinq.ObtenerInquilinos();
+
+            return View("Create");
+        }
+
+        [HttpGet]
+        public ActionResult FinalizarContrato(int id)
+        {   
+            RepositorioContrato rc = new RepositorioContrato();
+
+            ViewBag.Monto = rc.CalcularMontoCancelacion(id);
+
+            return View(rc.ObtenerUnContrato(id));
+        }
+
+         [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult FinalizarContrato(int id, Contrato contrato)
+        {
+                RepositorioContrato rc = new RepositorioContrato();
+                rc.FinalizarContrato(id);
+
+                return RedirectToAction(nameof(Index));
+
+        }
+
+        [HttpGet]
+        public ActionResult RenovarContrato(int id_inmueble = 0,int id_inquilino = 0) 
+        {
+            ViewBag.id_inmueble = id_inmueble;
+            ViewBag.id_inquilino = id_inquilino;
+            
+            RepositorioInmueble ri = new RepositorioInmueble();
+            RepositorioInquilino rinq = new RepositorioInquilino();
+
+            ViewBag.listaInmuebles = ri.ObtenerInmuebles();
+            ViewBag.listaInquilinos = rinq.ObtenerInquilinos();
+
+            return View("Create");
+        }
+
 
     }
 }

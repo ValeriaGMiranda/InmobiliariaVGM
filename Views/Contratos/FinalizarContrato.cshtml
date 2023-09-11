@@ -1,0 +1,61 @@
+@model inmobiliariaVGM.Models.Contrato
+
+@{
+    ViewData["Title"] = "Finalizar Contrato";
+}
+
+<h1>Finalizar Contrato</h1>
+
+<h3>¿Seguro que desea Finalizar este contrato?</h3>
+<div>
+    <h4>Información del contrato</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id_Contrato)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Id_Contrato)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha_Inicio)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha_Inicio)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Fecha_Fin)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Fecha_Fin)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Monto)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Monto)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id_Inmueble)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Inmueble.Direccion)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Id_Inquilino)
+        </dt>
+        <dd class = "col-sm-10">
+            @(Model.Inquilino.Nombre + " " + Model.Inquilino.Apellido)
+        </dd>
+    </dl>
+    <dl class="row">
+        <dd class = "col-sm-10">
+            El Monto Cancelacion es: @ViewBag.Monto
+        </dd>
+    </dl>
+    
+    <form asp-action="FinalizarContrato">
+        <input type="submit" value="Finalizar" class="btn btn-danger" /> |
+        <a asp-action="Index">Volver al listado</a>
+    </form>
+</div>

@@ -135,9 +135,7 @@ namespace inmobiliariaVGM.Controllers
             RepositorioTipo rt = new RepositorioTipo();
 
             ViewBag.listaUsos = ru.ObtenerUsos();
-            ViewBag.listaTipos = rt.ObtenerTipos();
-
-
+            ViewBag.listaTipos = rt.ObtenerTipos(); 
 
             RepositorioInmueble ri = new RepositorioInmueble();
             return View(ri.BuscarInmuebles(ib));

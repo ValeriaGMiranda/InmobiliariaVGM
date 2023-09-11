@@ -168,13 +168,12 @@ public class RepositorioContrato
         using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
 
-            var sql = @"INSERT INTO contratos(Id_Contrato,Fecha_Inicio,Fecha_Fin,Monto,Id_Inmueble,Id_Inquilino)
-            VALUES (@Id_Contrato,@Fecha_Inicio,@Fecha_Fin,@Monto,@Id_Inmueble,@Id_Inquilino);
+            var sql = @"INSERT INTO contratos(Fecha_Inicio,Fecha_Fin,Monto,Id_Inmueble,Id_Inquilino)
+            VALUES (@Fecha_Inicio,@Fecha_Fin,@Monto,@Id_Inmueble,@Id_Inquilino);
             SELECT LAST_INSERT_ID()";
 
             using(MySqlCommand cmd = new MySqlCommand(sql, conn))
             {
-                cmd.Parameters.AddWithValue("@Id_Contrato", contrato.Id_Contrato);
                 cmd.Parameters.AddWithValue("@Fecha_Inicio", contrato.Fecha_Inicio);
                 cmd.Parameters.AddWithValue("@Fecha_Fin", contrato.Fecha_Fin);
                 cmd.Parameters.AddWithValue("@Monto", contrato.Monto);
@@ -351,6 +350,71 @@ public class RepositorioContrato
         }
 
         return res;
+    }
+
+ public int CalcularMontoCancelacion(int id)
+    {
+        var dias_contrato = 0;
+        var aux = 0;
+        var dias_transcurridos = 0;
+        var monto = 0;
+
+          using(MySqlConnection conn = new MySqlConnection(connectionString))
+        {
+            //Calculo la cantidad de dias del contrato Restando fecha final menos fecha inicial
+            //Calculo la cantidad de dias transcurridos desde que comenzo el contrato hasta hoy
+            var sql = @"SELECT TIMESTAMPDIFF(DAY, c.Fecha_Inicio,c.Fecha_Fin) AS dias_contrato,
+                        TIMESTAMPDIFF(DAY, c.Fecha_Inicio,sysdate()) AS dias_transcurridos,c.monto
+                        from contratos c
+                        where c.id_contrato = @id";
+
+            using(MySqlCommand cmd = new MySqlCommand(sql, conn))
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+
+                conn.Open();
+                using(MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while(reader.Read())
+                    {
+                        dias_contrato =   reader.GetInt32("dias_contrato");
+                        dias_transcurridos =   reader.GetInt32("dias_transcurridos");
+                        monto =   reader.GetInt32("monto");
+                    }
+                }
+                conn.Close();
+            }
+        }
+
+        aux = dias_contrato/2;
+        if(dias_transcurridos > aux){
+             return monto;   
+        }else{
+            return monto*2; 
+        }
+
+
+    }
+
+ public int FinalizarContrato(int id)
+    {
+        var res = -2;
+
+        using(MySqlConnection conn = new MySqlConnection(connectionString))
+        {
+            var sql = @"UPDATE contratos
+            SET Fecha_Fin=sysdate() 
+            WHERE Id_Contrato = @id";
+
+            using(MySqlCommand cmd = new MySqlCommand(sql,conn))
+            {
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                res = cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            return res;
+        }      
     }
 
 }
