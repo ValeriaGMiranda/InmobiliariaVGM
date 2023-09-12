@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-09-2023 a las 08:47:00
+-- Tiempo de generación: 12-09-2023 a las 07:12:40
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.0.28
 
@@ -225,17 +225,17 @@ CREATE TABLE `usuarios` (
   `Mail` varchar(150) NOT NULL,
   `Password` varchar(150) NOT NULL,
   `Rol` int(11) NOT NULL,
-  `Avatar` varchar(150) DEFAULT NULL,
-  `AvatarFile` varchar(150) DEFAULT NULL
+  `Avatar` varchar(150) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`Id_Usuario`, `Apellido`, `Nombre`, `Mail`, `Password`, `Rol`, `Avatar`, `AvatarFile`) VALUES
-(5, 'Gran', 'Jefecita', 'j@mail.com', '8Cesb0+zZIKa1rqEmHaDhQlyTRq9YLZVXQJ7KtUaVLE=', 0, 'aaaaaaaaaaaaaaaaaaaaaaaaaaa', NULL),
-(6, 'nnnn', 'vvvvv', 'gf@g.com', '8Cesb0+zZIKa1rqEmHaDhQlyTRq9YLZVXQJ7KtUaVLE=', 1, 'bsdnaslnlfnasf', NULL);
+INSERT INTO `usuarios` (`Id_Usuario`, `Apellido`, `Nombre`, `Mail`, `Password`, `Rol`, `Avatar`) VALUES
+(5, 'Gran', 'Jefecita', 'j@mail.com', '8Cesb0+zZIKa1rqEmHaDhQlyTRq9YLZVXQJ7KtUaVLE=', 2, '/Uploads\\avatar_666c2744-909e-48ce-8ad0-04b2e75c5b77.jpg'),
+(6, 'nnnn', 'vvvvv', 'gf@g.com', 'PjjdnezR2XloKuDf/uN0VWatrvl4BzKtdVF4CLVHeVM=', 1, '/Uploads\\avatar_d95c56f9-8663-4860-94a7-4b29ecd3aa0e.jpg'),
+(13, '2', '2', '2', 'SHq81eAjgfcH9b/jkKr268MhBIKVyOOYQlWaG9ufa/g=', 1, '/Uploads\\avatar_71f1ec44-f76a-408f-b91c-7981a495e7c8.jpg');
 
 --
 -- Índices para tablas volcadas
@@ -345,7 +345,7 @@ ALTER TABLE `usos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `Id_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id_Usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Restricciones para tablas volcadas

@@ -18,7 +18,9 @@ public class RepositorioUsuario
 
         using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
-            var sql = "SELECT Id_Usuario,Apellido,Nombre,Mail,Password,Rol,Avatar FROM Usuarios"; 
+            //Uso IFNULL(Avatar, '') por que me da error al traer los valores NULOS en las listas
+
+            var sql = "SELECT Id_Usuario,Apellido,Nombre,Mail,Password,Rol,IFNULL(Avatar, '') Avatar FROM Usuarios"; 
 
             using(MySqlCommand cmd = new MySqlCommand(sql, conn))
             {
@@ -52,7 +54,7 @@ public class RepositorioUsuario
 
           using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
-            var sql = @" SELECT Id_Usuario,Apellido,Nombre,Mail,Password,Rol,Avatar,AvatarFile 
+            var sql = @" SELECT Id_Usuario,Apellido,Nombre,Mail,Password,Rol,IFNULL(Avatar, '') Avatar  
             FROM Usuarios
             WHERE Id_Usuario = @id";
 
@@ -90,8 +92,10 @@ public class RepositorioUsuario
         using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
 
-            var sql = @"INSERT INTO Usuarios(Apellido,Nombre,Mail,Password,Rol,Avatar,AvatarFile)
-            VALUES (@Apellido,@Nombre,@Mail,@Password,@Rol,@Avatar,@AvatarFile);
+            
+
+            var sql = @"INSERT INTO Usuarios(Apellido,Nombre,Mail,Password,Rol,Avatar)
+            VALUES (@Apellido,@Nombre,@Mail,@Password,@Rol,@Avatar);
             SELECT LAST_INSERT_ID()";
 
             using(MySqlCommand cmd = new MySqlCommand(sql, conn))
@@ -101,8 +105,12 @@ public class RepositorioUsuario
                 cmd.Parameters.AddWithValue("@Mail", usuario.Mail);
                 cmd.Parameters.AddWithValue("@Password", usuario.Password);
                 cmd.Parameters.AddWithValue("@Rol", usuario.Rol);
-                cmd.Parameters.AddWithValue("@Avatar", usuario.Avatar);
-                cmd.Parameters.AddWithValue("@AvatarFile", usuario.AvatarFile);
+                if(string.IsNullOrEmpty(usuario.Avatar)){
+                    cmd.Parameters.AddWithValue("@Avatar", DBNull.Value);
+                }else{
+                    cmd.Parameters.AddWithValue("@Avatar", usuario.Avatar);
+                }
+                
                 conn.Open();
                 res = Convert.ToInt32(cmd.ExecuteScalar());
                 usuario.Id_Usuario = res;
@@ -120,7 +128,7 @@ public class RepositorioUsuario
         using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
             var sql = @"UPDATE Usuarios
-            SET Apellido=@Apellido,Nombre=@Nombre,Mail=@Mail,Password=@Password,Rol=@Rol,Avatar=@Avatar 
+            SET Apellido=@Apellido,Nombre=@Nombre,Mail=@Mail,Rol=@Rol,Avatar=@Avatar 
             WHERE Id_Usuario = @id";
 
             using(MySqlCommand cmd = new MySqlCommand(sql,conn))
@@ -128,7 +136,6 @@ public class RepositorioUsuario
                 cmd.Parameters.AddWithValue("@Apellido", usuario.Apellido);
                 cmd.Parameters.AddWithValue("@Nombre", usuario.Nombre);
                 cmd.Parameters.AddWithValue("@Mail", usuario.Mail);
-                cmd.Parameters.AddWithValue("@Password", usuario.Password);
                 cmd.Parameters.AddWithValue("@Rol", usuario.Rol);
                 cmd.Parameters.AddWithValue("@Avatar", usuario.Avatar);
                 cmd.Parameters.AddWithValue("@id", usuario.Id_Usuario);
@@ -166,7 +173,7 @@ public class RepositorioUsuario
 
           using(MySqlConnection conn = new MySqlConnection(connectionString))
         {
-            var sql = @" SELECT Id_Usuario,Apellido,Nombre,Mail,Password,Rol,Avatar,AvatarFile 
+            var sql = @" SELECT Id_Usuario,Apellido,Nombre,Mail,Password,Rol,IFNULL(Avatar, '') Avatar
             FROM Usuarios
             WHERE Mail = @mail";
 
@@ -196,5 +203,29 @@ public class RepositorioUsuario
         }
         return res; 
     }
+
+
+    public int CambiarPassword(int id,String pass)
+    {
+        var res = -2;
+
+        using(MySqlConnection conn = new MySqlConnection(connectionString))
+        {
+            var sql = @"UPDATE Usuarios
+            SET Password=@Password 
+            WHERE Id_Usuario = @id";
+
+            using(MySqlCommand cmd = new MySqlCommand(sql,conn))
+            {
+                cmd.Parameters.AddWithValue("@Password", pass);
+                cmd.Parameters.AddWithValue("@id", id);
+                conn.Open();
+                res = cmd.ExecuteNonQuery();
+                conn.Close();
+            }
+            return res;
+        }      
+    }
+    
 }
 

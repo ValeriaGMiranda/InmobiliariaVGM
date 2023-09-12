@@ -25,9 +25,6 @@
                 @Html.DisplayNameFor(model => model.Mail)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Password)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Rol)
             </th>
             <th>
@@ -52,13 +49,10 @@
                 @Html.DisplayFor(modelItem => item.Mail)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Rol)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Avatar)
+                <img src="@(item.Avatar == ""?"/Uploads/av1.jpg":item.Avatar)" class="rounded-circle" style="width: 30px;height: 30px;" alt="Avatar" />
             </td>
             <td>
                 @Html.ActionLink("Editar", "Edit", new { id=item.Id_Usuario}) |

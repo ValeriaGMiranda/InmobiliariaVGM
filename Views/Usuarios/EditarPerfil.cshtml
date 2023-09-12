@@ -1,16 +1,16 @@
 @model inmobiliariaVGM.Models.Usuario
 
 @{
-    ViewData["Title"] = "Editar Usuario";
+    ViewData["Title"] = "Editar Perfil";
 }
 
-<h1>Editar Usuario</h1>
+<h1>Editar Perfil</h1>
 
-<h4>Usuario</h4>
+<h4>Editar Perfil</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit"  enctype="multipart/form-data">
+        <form asp-action="EditarPerfil"  enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
              <input type="hidden" name="Id_Usuario" value="@Model.Id_Usuario"/>
             <div class="form-group">
