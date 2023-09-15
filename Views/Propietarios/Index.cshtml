@@ -4,12 +4,39 @@
     ViewData["Title"] = "Listado de Propietarios";
 }
 
-<h1>Listado de Propietarios</h1>
+<h2>Listado de Propietarios</h2>
 
 <p>
-    <a asp-action="Create">Crear nuevo propietario</a>
+    <a asp-action="Create" class="btn btn-primary">Crear nuevo propietario</a>
 </p>
-<table class="table">
+
+
+
+@if(TempData["creado"] !=  null){
+    <div class="alert alert-success" role="alert">
+    Propietario Creado Exitosamente
+    </div>
+}
+
+@if(TempData["eliminado"] !=  null){
+<div class="alert alert-danger" role="alert">
+    Propietario Eliminado Exitosamente
+</div>
+}
+
+@if(TempData["editado"] !=  null){
+<div class="alert alert-warning" role="alert">
+    Propietario Editado Exitosamente
+</div>
+}
+
+
+<div class="card">
+  <div class="card-header">
+    Listado de Propietarios
+  </div>
+  <div class="card-body">
+   <table class="table">
     <thead>
         <tr>
             <th>
@@ -37,13 +64,17 @@
                 @Html.DisplayFor(modelItem => item.Mail)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Propietario }) |
-                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Propietario }) |
+                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Propietario}, new { @class="btn btn-warning"} ) |
+                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Propietario }, new { @class="btn btn-primary"} ) |
                 @if(User.IsInRole("Administrador")){
-                    @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Propietario })
+                    @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Propietario }, new { @class="btn btn-danger"} )
                 }               
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+  </div>
+</div>
+

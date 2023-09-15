@@ -4,11 +4,22 @@
     ViewData["Title"] = "Listado de Inmuebles";  
 }
 
-<h1>Listado de Inmuebles</h1>
+<h2>Inmuebles Disponibles por Fecha</h2>
+
+<p>Dadas dos fechas posibles de un contrato (inicio y fin), listar todos
+los inmuebles que no estén ocupados en algún contrato entre esas
+fechas.</p>
+
+<div class="card">
+  <div class="card-header">
+    Filtros
+  </div>
+  <div class="card-body">
+    
 
     <form asp-action="InmueblesContratos">
 
-        <div class="row mt-5 mb-5">
+        <div class="row">
                 <div class="col-md-2">
                     <label class="control-label">Fecha Desde</label>
                     <input type="date" name="Fecha_Inicio" required class="form-control" />
@@ -18,10 +29,23 @@
                     <input type="date" name="Fecha_Fin" required class="form-control" />
                 </div>
                  <div class="col-md-1 mt-4">
-                    <input type="submit" value="Crear" class="btn btn-primary" />
+                    <input type="submit" value="Filtrar" class="btn btn-primary" />
                 </div>
         </div>
  </form>
+
+  </div>
+</div>
+
+
+
+<br>
+<div class="card">
+  <div class="card-header">
+    Inmuebles Disponibles por Fecha
+  </div>
+  <div class="card-body">
+    
 <div class="row">
     <div class="col-md-12">
 
@@ -58,7 +82,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Id_Propietario)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -94,9 +117,6 @@
             <td>
                 @(item.Titular.Nombre + ' ' +  item.Titular.Apellido)
             </td>
-            <td>
-                @Html.ActionLink("Crear Contrato", "Create","Contratos", new { id_Inmueble=item.Id_Inmueble }) |          
-            </td>
         </tr>
 }
     </tbody>
@@ -106,3 +126,8 @@
 
     </div>
 </div>
+
+
+  </div>
+</div>
+

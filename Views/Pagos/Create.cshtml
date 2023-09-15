@@ -4,12 +4,17 @@
     ViewData["Title"] = "Realizar Pago";
 }
 
-<h1>Realizar Pago</h1>
-
-<h4>Pago</h4>
+<h2>Realizar Pago</h2>
 <hr />
+
+<div class="card">
+  <div class="card-header">
+    Realizar Pago
+  </div>
+  <div class="card-body">
+    
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -28,13 +33,21 @@
                 <span asp-validation-for="Id_Contrato" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <br>
                 <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
+
+
+  </div>
+</div>
+
+<br>
+
 <div>
-    <a asp-action="Index">Volver al listado</a>
+    <a asp-action="Index"  class="btn btn-secondary">Volver al listado</a>
 </div>
 

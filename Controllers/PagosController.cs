@@ -38,17 +38,11 @@ namespace inmobiliariaVGM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Pago pago)
         {
-            try
-            {
                 RepositorioPago rp = new RepositorioPago();
                 rp.CrearPago(pago);
-
+                 TempData["creado"] = "Si";
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+    
         }
 
 
@@ -68,6 +62,9 @@ namespace inmobiliariaVGM.Controllers
 
                 RepositorioPago rp = new RepositorioPago();
                 rp.EditarPago(pago);
+
+                 TempData["editado"] = "Si";
+
                 return RedirectToAction(nameof(Index));
 
         }
@@ -87,23 +84,19 @@ namespace inmobiliariaVGM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, Pago pago)
         {
-            try
-            {
                 RepositorioPago rp = new RepositorioPago();
                 rp.EliminarPago(id);
 
+                 TempData["eliminado"] = "Si";
+
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         [HttpGet]
         // GET: Pagos/Create
-        public ActionResult PagoPorContrato(int id)
+        public ActionResult PagoPorContrato(int id,int id_inquilino = 0)
         {
+            ViewBag.id_inquilino = id_inquilino;
             RepositorioPago rp = new RepositorioPago();
             ViewBag.Id_Contrato = id;
             ViewBag.ListaPagos = rp.PagosContratoPorInquilino(id);

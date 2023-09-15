@@ -6,11 +6,20 @@
     var listaTipos = (List<Tipo>)ViewBag.listaTipos;   
 }
 
-<h1>Listado de Inmuebles</h1>
+<h2>Busqueda de Inmuebles</h2>
+<p>Dadas dos fechas posibles de un contrato (inicio y fin), listar todos
+los inmuebles que no estén ocupados en algún contrato entre esas
+fechas.</p>
 
+<div class="card">
+  <div class="card-header">
+    Filtros de Busqueda
+  </div>
+  <div class="card-body">
+    
     <form asp-action="BuscarInmuebles">
 
-        <div class="row mt-5 mb-5">
+        <div class="row">
                 <div class="col-md-1">
                     <label class="control-label">Ambientes</label>
                     <input type="number" name="Ambientes" class="form-control" />
@@ -48,10 +57,23 @@
                     <input type="date" name="Fecha_Fin" required class="form-control" />
                 </div>
                  <div class="col-md-1 mt-4">
-                    <input type="submit" value="Crear" class="btn btn-primary" />
+                    <input type="submit" value="Filtrar" class="btn btn-primary" />
                 </div>
         </div>
  </form>
+
+  </div>
+</div>
+
+<br>
+
+<div class="card">
+  <div class="card-header">
+    Listado de Inmuebles
+  </div>
+  <div class="card-body">
+    
+
 <div class="row">
     <div class="col-md-12">
 
@@ -125,7 +147,7 @@
                 @(item.Titular.Nombre + ' ' +  item.Titular.Apellido)
             </td>
             <td>
-                @Html.ActionLink("Crear Contrato", "CreateContrato","Contratos", new { id_Inmueble=item.Id_Inmueble }) |          
+                @Html.ActionLink("Crear Contrato", "CreateContrato","Contratos", new { id_Inmueble=item.Id_Inmueble }, new { @class="btn btn-outline-primary"}) |          
             </td>
         </tr>
 }
@@ -136,3 +158,9 @@
 
     </div>
 </div>
+
+
+  </div>
+</div>
+
+

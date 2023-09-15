@@ -5,8 +5,16 @@
     var listaInmuebles = (List<Inmueble>)ViewBag.listaInmuebles;
 }
 
-<h1>Reporte de Contratos</h1>
+<h2>Reporte de Contratos por Inmueble</h2>
+<p>Listar todos los contratos, incluyendo su inquilino, de un inmueble
+en particular.</p>
 
+<div class="card">
+  <div class="card-header">
+    Filtros
+  </div>
+  <div class="card-body">
+    
  <form asp-action="ContratosInmuebles">
     <div class="row">
     <div class="col-md-2">
@@ -20,10 +28,24 @@
             </select>
     </div>
     <div class="col-md-1 mt-4">
-        <input type="submit" value="Crear" class="btn btn-primary" />
+        <input type="submit" value="Filtrar" class="btn btn-primary" />
     </div>
 </div>
  </form>
+  </div>
+</div>
+
+
+
+<br>
+
+<div class="card">
+  <div class="card-header">
+    Reporte de Contratos por Inmueble
+  </div>
+  <div class="card-body">
+    
+
 <div class="row">
     <div class="col-md-12">
         <table class="table">
@@ -76,3 +98,8 @@
         </table>
     </div>
 </div>
+
+
+  </div>
+</div>
+

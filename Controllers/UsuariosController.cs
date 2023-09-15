@@ -96,6 +96,8 @@ namespace inmobiliariaVGM.Controllers
 
                 ru.CrearUsuario(usuario);
 
+                TempData["creado"] = "Si";
+
                 return RedirectToAction(nameof(Index));
             
         }
@@ -141,9 +143,8 @@ namespace inmobiliariaVGM.Controllers
                     usuario.Avatar = Path.Combine("/Uploads",filename);
 
                 }
-
                 ru.EditarUsuario(usuario);
-
+                 TempData["editado"] = "Si";
                 return RedirectToAction(nameof(Index));
 
         }
@@ -163,17 +164,10 @@ namespace inmobiliariaVGM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, Usuario usuario)
         {
-            try
-            {
                 RepositorioUsuario ru = new RepositorioUsuario();
                 ru.EliminarUsuario(id);
-
+                TempData["eliminado"] = "Si";
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         [AllowAnonymous]
@@ -284,8 +278,9 @@ namespace inmobiliariaVGM.Controllers
                 }
 
                 ru.EditarUsuario(usuario);
+                 TempData["editado"] = "Si";
 
-                return RedirectToAction(nameof(Index));
+                return View(ru.ObtenerUnUsuario(id));
 
         }
         [HttpGet]
@@ -311,8 +306,11 @@ namespace inmobiliariaVGM.Controllers
 
                 if(pass.Password == pass.Confirmacion){
                     ru.CambiarPassword(id,hashed);
+
+                     TempData["otro"] = "Password Cambiado Correctamente";
+
                 }else{
-                    Console.WriteLine("Error no coinciden los pass");
+                     TempData["otro"] = "Error no coinciden los password";
                 }
                 
                 return  View();

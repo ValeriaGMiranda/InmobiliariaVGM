@@ -4,9 +4,14 @@
     ViewData["Title"] = "Detalles del Propietario";
 }
 
-<h1>Detalles del Propietario</h1>
+<h2>Detalles del Propietario</h2>
 
-<div>
+<div class="card">
+  <div class="card-header">
+    Detalles del Propietario
+  </div>
+  <div class="card-body">
+    <div>
     <h4>Propietario</h4>
     <hr />
     <dl class="row">
@@ -48,7 +53,13 @@
         </dd>
     </dl>
 </div>
+  </div>
+</div>
+
+
+
+<br>
 <div>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id_Propietario  }) |
-    <a asp-action="Index">Volver al listado</a>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id_Propietario  }, new{ @class="btn btn-warning"}) |
+    <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
 </div>

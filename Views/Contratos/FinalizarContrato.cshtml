@@ -2,13 +2,19 @@
 
 @{
     ViewData["Title"] = "Finalizar Contrato";
+    var id_inquilino = (int)(ViewBag.id_inquilino != null? ViewBag.id_inquilino : 0 );
 }
 
-<h1>Finalizar Contrato</h1>
+<h2>Finalizar Contrato</h2>
 
-<h3>¿Seguro que desea Finalizar este contrato?</h3>
+<div class="card">
+  <div class="card-header">
+    Finalizar Contrato
+  </div>
+  <div class="card-body">
+    
 <div>
-    <h4>Información del contrato</h4>
+    <h4>¿Seguro que desea Finalizar este contrato?</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -56,6 +62,20 @@
     
     <form asp-action="FinalizarContrato">
         <input type="submit" value="Finalizar" class="btn btn-danger" /> |
-        <a asp-action="Index">Volver al listado</a>
+
+         @if(id_inquilino > 0){
+            <a asp-action="ContratosPorInquilino" asp-controller="Contratos" asp-route-id="@id_inquilino"  class="btn btn-secondary">Volver al listado</a>
+        }
+        else{
+            <a asp-action="Index"class="btn btn-secondary">Volver al listado</a>
+        }
+        
     </form>
 </div>
+
+
+  </div>
+</div>
+
+
+

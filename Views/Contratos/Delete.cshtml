@@ -4,11 +4,18 @@
     ViewData["Title"] = "Eliminar Contrato";
 }
 
-<h1>Eliminar Contrato</h1>
+<h2>Eliminar Contrato</h2>
 
-<h3>¿Seguro que desea eliminar este contrato?</h3>
+
+<div class="card">
+  <div class="card-header">
+    Eliminar Contrato
+  </div>
+  <div class="card-body">
+    
+
 <div>
-    <h4>Información del contrato</h4>
+    <p>¿Seguro que desea eliminar este contrato?</p>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -51,6 +58,11 @@
     
     <form asp-action="Delete">
         <input type="submit" value="Eliminar" class="btn btn-danger" /> |
-        <a asp-action="Index">Volver al listado</a>
+        <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
     </form>
 </div>
+
+
+  </div>
+</div>
+

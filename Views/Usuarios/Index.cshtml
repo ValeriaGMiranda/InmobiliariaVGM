@@ -4,11 +4,45 @@
     ViewData["Title"] = "Lista de Usuarios";
 }
 
-<h1>Lista de Usuarios</h1>
+<h2>Lista de Usuarios</h2>
 
 <p>
-    <a asp-action="Create">Crear nuevo Usuario</a>
+    <a asp-action="Create" class="btn btn-primary">Crear nuevo Usuario</a>
 </p>
+
+
+@if(TempData["creado"] !=  null){
+    <div class="alert alert-success" role="alert">
+    Usuario Creado Exitosamente
+    </div>
+}
+
+
+@if(TempData["eliminado"] !=  null){
+<div class="alert alert-danger" role="alert">
+    Usuario Eliminado Exitosamente
+</div>
+}
+
+@if(TempData["editado"] !=  null){
+<div class="alert alert-warning" role="alert">
+    Usuario Editado Exitosamente
+</div>
+}
+
+@if(TempData["Otro"] !=  null){
+<div class="alert alert-danger" role="alert">
+    @TempData["Otro"]
+</div>
+}
+
+<div class="card">
+  <div class="card-header">
+    Lista de Usuarios
+
+  </div>
+  <div class="card-body">
+    
 <table class="table">
     <thead>
         <tr>
@@ -55,11 +89,17 @@
                 <img src="@(item.Avatar == ""?"/Uploads/av1.jpg":item.Avatar)" class="rounded-circle" style="width: 30px;height: 30px;" alt="Avatar" />
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Usuario}) |
-                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Usuario}) |
-                @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Usuario })
+                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Usuario}, new { @class="btn btn-warning"}) |
+                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Usuario}, new { @class="btn btn-info"}) |
+                @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Usuario }, new { @class="btn btn-danger"})
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+
+  </div>
+</div>
+
+

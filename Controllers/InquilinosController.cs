@@ -38,17 +38,14 @@ namespace inmobiliariaVGM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Inquilino inquilino)
         {
-            try
-            {
+
                 RepositorioInquilino ri = new RepositorioInquilino();
                 ri.CrearInquilino(inquilino);
 
+                TempData["creado"] = "Si";
+
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
         }
 
         // GET: Inquilinos/Edit/5
@@ -63,17 +60,13 @@ namespace inmobiliariaVGM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, Inquilino inquilino)
         {
-            try
-            {
                 RepositorioInquilino ri = new RepositorioInquilino();
                 ri.EditarInquilino(inquilino);
 
+                TempData["editado"] = "Si";
+    
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
         }
 
         // GET: Inquilinos/Delete/5
@@ -91,17 +84,12 @@ namespace inmobiliariaVGM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, Inquilino inquilino)
         {
-            try
-            {
                 RepositorioInquilino ri = new RepositorioInquilino();
                 ri.EliminarInquilino(id);
 
+                TempData["eliminado"] = "Si";
+
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
 

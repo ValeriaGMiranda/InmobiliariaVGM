@@ -4,11 +4,16 @@
     ViewData["Title"] = "Detalles del Inmueble";
 }
 
-<h1>Detalles</h1>
-
-<div>
-    <h4>Inmueble</h4>
+<h2>Detalles del inmueble</h2>
     <hr />
+
+<div class="card">
+  <div class="card-header">
+    Detalles del inmueble
+  </div>
+  <div class="card-body">
+    
+<div>
     <dl class="row">
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Id_Inmueble)
@@ -72,7 +77,13 @@
         </dd>
     </dl>
 </div>
+
+  </div>
+</div>
+
+
+<br>
 <div>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id_Inmueble }) |
-    <a asp-action="Index">Volver al listado</a>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id_Inmueble }, new { @class="btn btn-warning"}) |
+    <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
 </div>

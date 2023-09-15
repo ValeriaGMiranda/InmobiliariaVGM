@@ -39,17 +39,13 @@ namespace inmobiliariaVGM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Propietario propietario)
         {
-            try
-            {
+
                 RepositorioPropietario rp = new RepositorioPropietario();
                 rp.CrearPropietario(propietario);
+
+                TempData["creado"] = "Si";
                 
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         // GET: Propietarios/Edit/5
@@ -69,6 +65,8 @@ namespace inmobiliariaVGM.Controllers
             {
                 RepositorioPropietario rp = new RepositorioPropietario();
                 rp.EditarPropietario(propietario);
+
+                TempData["editado"] = "Si";
 
                 return RedirectToAction(nameof(Index));
             }
@@ -93,17 +91,14 @@ namespace inmobiliariaVGM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, Propietario propietario)
         {
-            try
-            {
+
                 RepositorioPropietario rp = new RepositorioPropietario();
                 rp.EliminarPropietario(id);
 
+                TempData["eliminado"] = "Si";
+
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+
         }
     }
 }

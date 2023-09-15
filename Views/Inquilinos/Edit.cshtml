@@ -4,12 +4,18 @@
     ViewData["Title"] = "Editar Inquilino";
 }
 
-<h1>Editar Inquilino</h1>
+<h2>Editar Inquilino</h2>
 
-<h4>Información de Inquilino</h4>
 <hr />
+
+<div class="card">
+  <div class="card-header">
+    Editar Inquilino
+  </div>
+  <div class="card-body">
+    
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" name="Id_Inquilino" value="@Model.Id_Inquilino" />
@@ -34,13 +40,18 @@
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Editar" class="btn btn-primary" />
+                <br>
+                <input type="submit" value="Editar" class="btn btn-warning" />
             </div>
         </form>
     </div>
 </div>
 
+
+  </div>
+</div>
+  <br>
 <div>
-    <a asp-action="Index">Volver al listado</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
 </div>
 

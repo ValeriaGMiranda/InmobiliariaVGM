@@ -4,11 +4,44 @@
     ViewData["Title"] = "Listado de Contratos";
 }
 
-<h1>Listado de Contratos</h1>
+<h2>Listado de Contratos</h2>
 
 <p>
-    <a asp-action="Create">Crear nuevo contrato</a>
+    <a asp-action="Create" class="btn btn-primary">Crear nuevo contrato</a>
 </p>
+
+@if(TempData["creado"] !=  null){
+    <div class="alert alert-success" role="alert">
+    Contrato Creado Exitosamente
+    </div>
+}
+
+
+@if(TempData["eliminado"] !=  null){
+<div class="alert alert-danger" role="alert">
+    Contrato Eliminado Exitosamente
+</div>
+}
+
+@if(TempData["editado"] !=  null){
+<div class="alert alert-warning" role="alert">
+    Contrato Editado Exitosamente
+</div>
+}
+
+@if(TempData["Otro"] !=  null){
+<div class="alert alert-danger" role="alert">
+    @TempData["Otro"]
+</div>
+}
+
+
+<div class="card">
+  <div class="card-header">
+    Listado de Contratos
+  </div>
+  <div class="card-body">
+    
 <table class="table">
     <thead>
         <tr>
@@ -55,23 +88,30 @@
                 @(item.Inquilino.Nombre + ' ' +  item.Inquilino.Apellido)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Contrato}) |
-                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Contrato }) |
+                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Contrato}, new { @class="btn btn-warning"}) |
+                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Contrato }, new { @class="btn btn-info"}) |
                 @if(User.IsInRole("Administrador"))
                 {
-                    @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Contrato })
+                    @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Contrato }, new { @class="btn btn-danger"})
                 }
-                 @Html.ActionLink("Pagar Contrato", "PagoPorContrato", "Pagos", new { id=item.Id_Contrato }) |
+                 @Html.ActionLink("Pagar", "PagoPorContrato", "Pagos", new { id=item.Id_Contrato }, new { @class="btn btn-outline-primary"}) |
 
                 @if(DateTime.Now >= item.Fecha_Inicio && DateTime.Now <= item.Fecha_Fin){
-                   @Html.ActionLink("Finalizar Contrato", "FinalizarContrato", "Contratos", new { id=item.Id_Contrato })  
+                   @Html.ActionLink("Finalizar", "FinalizarContrato", "Contratos", new { id=item.Id_Contrato }, new { @class="btn btn-outline-danger"})  
                 } 
 
                 @if(DateTime.Now < item.Fecha_Inicio || DateTime.Now > item.Fecha_Fin){
-                   @Html.ActionLink("Renovar Contrato", "RenovarContrato", "Contratos", new { id_inquilino=item.Id_Inquilino,id_inmueble = item.Id_Inmueble }) 
+                   @Html.ActionLink("Renovar", "RenovarContrato", "Contratos", new { id_inquilino=item.Id_Inquilino,id_inmueble = item.Id_Inmueble }, new { @class="btn btn-outline-success"}) 
                 }
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+
+  </div>
+</div>
+
+
+

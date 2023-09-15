@@ -4,10 +4,25 @@
     ViewData["Title"] = "Editar Perfil";
 }
 
-<h1>Editar Perfil</h1>
-
-<h4>Editar Perfil</h4>
+<h2>Editar Perfil</h2>
 <hr />
+
+
+
+@if(TempData["editado"] !=  null){
+<div class="alert alert-warning" role="alert">
+    Usuario Editado Exitosamente
+</div>
+}
+
+
+
+<div class="card">
+  <div class="card-header">
+    Editar Perfil
+  </div>
+  <div class="card-body">
+    
 <div class="row">
     <div class="col-md-4">
         <form asp-action="EditarPerfil"  enctype="multipart/form-data">
@@ -43,14 +58,16 @@
                 <input asp-for="AvatarFile" class="form-control" />
                 <span asp-validation-for="AvatarFile" class="text-danger"></span>
             </div>
+            <input asp-for="Avatar" class="form-control" type="hidden" />
             <div class="form-group">
-                <input type="submit" value="Editar" class="btn btn-primary" />
+                <input type="submit" value="Editar" class="btn btn-warning" />
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Volver al listado</a>
-</div>
 
+
+  </div>
+</div>
+<br>

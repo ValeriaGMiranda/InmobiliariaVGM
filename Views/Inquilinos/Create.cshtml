@@ -6,10 +6,15 @@
 
 <h1>Crear Inquilino</h1>
 
-<h4>Inquilino</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
+
+<div class="card">
+  <div class="card-header">
+    Featured
+  </div>
+  <div class="card-body">
+    <div class="row">
+    <div class="col-md-12">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -33,13 +38,21 @@
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
             <div class="form-group">
+                
+                <br>
                 <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
+
+  </div>
+</div>
+
+<br>
+
 <div>
-    <a asp-action="Index">Volver al listado</a>
+    <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
 </div>
 

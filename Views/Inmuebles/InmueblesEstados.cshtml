@@ -6,11 +6,20 @@
     var  listaPropietarios = (List<Propietario>)ViewBag.listaPropietarios;
 }
 
-<h1>Listado de Inmuebles</h1>
-
+<h2>Listado de Inmuebles por Disponibilidad</h2>
+ <p>Listar todos los inmuebles y su dueño, que estén en el sistema.
+Permitir filtrar por disponibilidad (no de fechas, sino de la propiedad
+“Estado” o “Disponible”).</p><p>Listar todos los inmuebles que le correspondan a un propietario.</p>
+   
+   <div class="card">
+  <div class="card-header">
+    Filtros
+  </div>
+  <div class="card-body">
+    
     <form asp-action="InmueblesEstados">
 
-        <div class="row mt-5 mb-5">
+        <div class="row">
                  <div class="col-md-2">
                     <label class="control-label">Activo</label>
                      <select class="form-control" name="Activo">
@@ -30,10 +39,25 @@
                     </select>
                 </div>
                  <div class="col-md-1 mt-4">
-                    <input type="submit" value="Crear" class="btn btn-primary" />
+                    <input type="submit" value="Filtrar" class="btn btn-primary" />
                 </div>
         </div>
  </form>
+
+
+  </div>
+</div>
+
+<br>
+
+<div class="card">
+  <div class="card-header">
+    Listado de Inmuebles por Disponibilidad
+  </div>
+  <div class="card-body">
+    
+
+
 <div class="row">
     <div class="col-md-12">
 
@@ -115,3 +139,7 @@
 
     </div>
 </div>
+
+  </div>
+</div>
+

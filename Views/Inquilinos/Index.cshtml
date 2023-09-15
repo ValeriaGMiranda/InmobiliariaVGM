@@ -4,11 +4,38 @@
     ViewData["Title"] = "Listado de Inquilinos";
 }
 
-<h1>Listado de Inquilinos</h1>
+<h2>Listado de Inquilinos</h2>
 
 <p>
-    <a asp-action="Create">Crear nuevo inquilino</a>
+    <a asp-action="Create" class="btn btn-primary">Crear nuevo inquilino</a>
 </p>
+
+
+@if(TempData["creado"] !=  null){
+    <div class="alert alert-success" role="alert">
+    Inquilino Creado Exitosamente
+    </div>
+}
+
+@if(TempData["eliminado"] !=  null){
+<div class="alert alert-danger" role="alert">
+    Inquilino Eliminado Exitosamente
+</div>
+}
+
+@if(TempData["editado"] !=  null){
+<div class="alert alert-warning" role="alert">
+    Inquilino Editado Exitosamente
+</div>
+}
+
+
+<div class="card">
+  <div class="card-header">
+    Listado de Inquilinos
+  </div>
+  <div class="card-body">
+    
 <table class="table">
     <thead>
         <tr>
@@ -37,14 +64,18 @@
                 @Html.DisplayFor(modelItem => item.Telefono)
             </td>
             <td>
-                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Inquilino }) |
-                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Inquilino }) |
+                @Html.ActionLink("Editar", "Edit", new { id=item.Id_Inquilino }, new { @class="btn btn-warning" }) |
+                @Html.ActionLink("Detalles", "Details", new { id=item.Id_Inquilino }, new { @class="btn btn-info" }) |
                 @if(User.IsInRole("Administrador")){
-                     @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Inquilino })
+                     @Html.ActionLink("Eliminar", "Delete", new { id=item.Id_Inquilino }, new { @class="btn btn-danger" })
                 }
-                @Html.ActionLink("Ver Contratos", "ContratosPorInquilino","Contratos", new { id=item.Id_Inquilino }) |
+                @Html.ActionLink("Ver Contratos", "ContratosPorInquilino","Contratos", new { id=item.Id_Inquilino }, new { @class="btn btn-outline-primary" }) |
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+
+  </div>
+</div>

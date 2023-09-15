@@ -56,11 +56,15 @@ namespace inmobiliariaVGM.Controllers
 
             if(ri.VerificarDisponibilidad(contrato.Id_Inmueble,contrato.Fecha_Inicio,contrato.Fecha_Fin)){
                 rc.CrearContrato(contrato);
+
+                TempData["creado"] = "Si";
+
                 return RedirectToAction(nameof(Index));
             }
             else{
-                Console.WriteLine("No se pudo crear el contrato.");
-                return View();
+                 TempData["Otro"] = "No se pudo crear el contrato no hay disponibilidad.";
+
+                 return RedirectToAction(nameof(Index));
             }
 
         }
@@ -87,14 +91,17 @@ namespace inmobiliariaVGM.Controllers
                 RepositorioInmueble ri = new RepositorioInmueble();                     
                 RepositorioContrato rc = new RepositorioContrato();
 
-           if(ri.VerificarDisponibilidad(contrato.Id_Inmueble,contrato.Fecha_Inicio,contrato.Fecha_Fin)){
+           //if(ri.VerificarDisponibilidad(contrato.Id_Inmueble,contrato.Fecha_Inicio,contrato.Fecha_Fin)){
                 rc.EditarContrato(contrato);
+
+                 TempData["editado"] = "Si";
+
                 return RedirectToAction(nameof(Index));
-            }
-            else{
-                Console.WriteLine("No se pudo crear el contrato.");
-                return View();
-            }
+           // }
+           // else{
+                   //TempData["Otro"] = "No se pudo crear el contrato no hay disponibilidad.";
+                    //return RedirectToAction(nameof(Index));
+            //}
        
         }
 
@@ -113,17 +120,10 @@ namespace inmobiliariaVGM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, Contrato contrato)
         {
-            try
-            {
                 RepositorioContrato rc = new RepositorioContrato();
                 rc.EliminarContrato(id);
-
+                TempData["eliminado"] = "Si";
                 return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
         }
 
         [HttpGet]
@@ -172,26 +172,32 @@ namespace inmobiliariaVGM.Controllers
 
             ViewBag.listaInmuebles = ri.ObtenerInmuebles();
             ViewBag.listaInquilinos = rinq.ObtenerInquilinos();
-
+            
             return View("Create");
         }
 
         [HttpGet]
-        public ActionResult FinalizarContrato(int id)
+        public ActionResult FinalizarContrato(int id,int id_inquilino = 0)
         {   
+            ViewBag.id_inquilino = id_inquilino;
             RepositorioContrato rc = new RepositorioContrato();
 
             ViewBag.Monto = rc.CalcularMontoCancelacion(id);
+
+            
 
             return View(rc.ObtenerUnContrato(id));
         }
 
          [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult FinalizarContrato(int id, Contrato contrato)
+        public ActionResult FinalizarContrato(int id, Contrato contrato,int id_inquilino = 0)
         {
+            ViewBag.id_inquilino = id_inquilino;
                 RepositorioContrato rc = new RepositorioContrato();
                 rc.FinalizarContrato(id);
+
+                TempData["Otro"] = "Contrato Finalizado Correctamente.";
 
                 return RedirectToAction(nameof(Index));
 

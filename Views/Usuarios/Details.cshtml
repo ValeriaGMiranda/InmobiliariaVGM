@@ -4,8 +4,15 @@
     ViewData["Title"] = "Detalles de Usuario";
 }
 
-<h1>Detalles de Usuario</h1>
+<h2>Detalles de Usuario</h2>
 
+<div class="card">
+  <div class="card-header">
+    Detalles de Usuario
+
+  </div>
+  <div class="card-body">
+    
 <div>
     <h4>Usuario</h4>
     <hr />
@@ -54,7 +61,12 @@
         </dd>
     </dl>
 </div>
+
+
+  </div>
+</div>
+<br>
 <div>
-    @Html.ActionLink("Editar", "Edit", new { id = Model.Id_Usuario}) |
-    <a asp-action="Index">Volver al listado</a>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id_Usuario}, new { @class="btn btn-warning"}) |
+    <a asp-action="Index" class="btn btn-secondary">Volver al listado</a>
 </div>
